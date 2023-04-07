@@ -8,7 +8,7 @@ def plot_sample_frames(images, labels):
     axes = axes.flatten()
 
     # Generate a list of 5 random integers between 0 and the length of the images variable
-    indices = np.random.randint(0, len(images), 5)
+    indices = [0, 1, 2, 3, 4] #np.random.randint(0, len(images), 5) 5
 
     # Loop over the indices and plot each frame with its corresponding label
     for i, index in enumerate(indices):
@@ -17,3 +17,4 @@ def plot_sample_frames(images, labels):
 
     plt.tight_layout()
     plt.show()
+    plt.savefig('first_five_frames.png')
