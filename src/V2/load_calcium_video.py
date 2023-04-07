@@ -15,7 +15,7 @@ def load_video_data(s3_calcium_url):
 
     with fs.open(s3_calcium_url, "rb") as f:
         with h5py.File(f) as file:
-            video_data = np.array(file["analysis/recording_20211016_163921-PP-BP-MC/data"])
+            video_data = np.array(file["analysis/recording_20211028_181307-PP-BP-MC/data"])
 
     end_time = time.time()
     execution_time = end_time - start_time
