@@ -40,21 +40,21 @@ def model_execution(params):
     print("Now saving model data to pickles. Please wait...")
     model.save('BPNN_V2_model.h5')
     
-#     # Save the history object to a pickle file
-#     with open('history.pkl', 'wb') as f:
-#         pickle.dump(history.history, f)
+    # Save the history object to a pickle file
+    with open('history.pkl', 'wb') as f:
+        pickle.dump(history.history, f)
     
-#     with open('train_images.pkl', 'wb') as f:
-#         pickle.dump(train_images, f)
+    with open('train_images.pkl', 'wb') as f:
+        pickle.dump(train_images, f)
 
-#     with open('val_images.pkl', 'wb') as f:
-#         pickle.dump(val_images, f)
+    with open('val_images.pkl', 'wb') as f:
+        pickle.dump(val_images, f)
 
-#     with open('train_labels.pkl', 'wb') as f:
-#         pickle.dump(train_labels, f)
+    with open('train_labels.pkl', 'wb') as f:
+        pickle.dump(train_labels, f)
         
-#     with open('val_labels.pkl', 'wb') as f:
-#         pickle.dump(val_labels, f)
+    with open('val_labels.pkl', 'wb') as f:
+        pickle.dump(val_labels, f)
         
     print("Done!")
 
