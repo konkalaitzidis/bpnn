@@ -53,9 +53,6 @@ def plot_confusion_matrix(x, no_of_behaviors, train_labels, val_labels, train_im
     plt.savefig(dir_path+"/"+'cm_val'+str(x)+'.png', bbox_inches='tight', dpi=300)
     plt.show()
     
-
-    
-
     
 def plot_accuracy(x, history):
     dir_path = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/accuracy"
