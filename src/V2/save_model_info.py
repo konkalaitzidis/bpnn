@@ -24,7 +24,7 @@ def save_training_info(model, history, video_name):
 
         # Write data for each epoch
         for i, (tl, ta, vl, va) in enumerate(zip(history.history['loss'], history.history['accuracy'], history.history['val_loss'], history.history['val_accuracy'])):
-            writer.writerow([model_name, i+1, tl, ta, vl, va, date_time, video_name, 'without frame subtraction'])
+            writer.writerow([model_name, i+1, tl, ta, vl, va, date_time, video_name, 'with frame subtraction, early stopping, and data augmentation on train_images'])
         writer.writerow(['', '', '', '', '', '', '', '' , ''])
         
         print("Training info saved in csv file.")

@@ -6,6 +6,7 @@ from tensorflow.keras.utils import plot_model
 from tensorflow.keras.callbacks import EarlyStopping
 import pickle
 import csv # CSV module is used for working with CSV (Comma Separated Values) files in Python.
+# from f1_score import f1_score
 
 
 
@@ -23,11 +24,17 @@ def model_execution(params):
     
     start_time = time.time()
     
+    # f1_score = f1_score()
+
+    
     print("Compiling model...")
     model.compile(loss='categorical_crossentropy', optimizer=tf.keras.optimizers.legacy.Adam(), metrics=['accuracy'])
     
+    early_stopping = EarlyStopping(monitor='val_loss', patience=3, verbose=1, mode='min')
+    
+    
     print("Running model. Go grab a coffee or smth.")
-    history = model.fit(train_images, train_labels, epochs=epochs, batch_size=batch_size, validation_data=validation_data) # add early stopping here
+    history = model.fit(train_images, train_labels, epochs=epochs, batch_size=batch_size, validation_data=validation_data, callbacks=[early_stopping]) 
     
     end_time = time.time()
     execution_time = end_time - start_time
