@@ -5,6 +5,8 @@ import seaborn as sns
 # for generating a confusion matrix
 from sklearn.metrics import confusion_matrix
 from keras.models import load_model
+from sklearn.metrics import f1_score
+
 
 
 
@@ -52,6 +54,8 @@ def plot_confusion_matrix(x, no_of_behaviors, train_labels, val_labels, train_im
     plt.ylabel('True Labels')
     plt.savefig(dir_path+"/"+'cm_val'+str(x)+'.png', bbox_inches='tight', dpi=300)
     plt.show()
+    
+    print("F1 score is: {:.3f}" .format(f1_score(val_labels, val_predicted_labels, average='micro')))
     
     
 def plot_accuracy(x, history):
