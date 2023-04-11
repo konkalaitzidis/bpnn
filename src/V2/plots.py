@@ -37,7 +37,7 @@ def plot_confusion_matrix(x, no_of_behaviors, train_labels, val_labels, train_im
 
     plt.figure(figsize=(8, 6))
     sns.heatmap(cm_train, annot=True, cmap='Blues', fmt='g', xticklabels=no_of_behaviors, yticklabels=no_of_behaviors)
-    plt.title('Confusion Matrix - Training')
+    plt.title('Confusion Matrix - Training, Turning Labels')
     plt.xlabel('Predicted Labels')
     plt.ylabel('True Labels')
     plt.savefig(dir_path+"/"+'cm_train'+str(x)+'.png', bbox_inches='tight', dpi=300)
@@ -49,7 +49,7 @@ def plot_confusion_matrix(x, no_of_behaviors, train_labels, val_labels, train_im
     # Plot the confusion matrix as a heatmap
     plt.figure(figsize=(8, 6))
     sns.heatmap(cm_val, annot=True, cmap='Blues', fmt='g', xticklabels=no_of_behaviors, yticklabels=no_of_behaviors)
-    plt.title('Confusion Matrix - Validation')
+    plt.title('Confusion Matrix - Validation, Turning Labels')
     plt.xlabel('Predicted Labels')
     plt.ylabel('True Labels')
     plt.savefig(dir_path+"/"+'cm_val'+str(x)+'.png', bbox_inches='tight', dpi=300)
@@ -63,7 +63,7 @@ def plot_accuracy(x, history):
 
     plt.plot(history['accuracy'])
     plt.plot(history['val_accuracy'])
-    plt.title('Model accuracy')
+    plt.title('Model accuracy, Turning Labels')
     plt.ylabel('Accuracy')
     plt.xlabel('Epoch')
     plt.legend(['Train', 'Validation'], loc='upper left')
@@ -76,9 +76,47 @@ def plot_loss(x, history):
 
     plt.plot(history['loss'])
     plt.plot(history['val_loss'])
-    plt.title('Model loss')
+    plt.title('Model loss, Turning Labels')
     plt.ylabel('loss')
     plt.xlabel('Epoch')
     plt.legend(['Train', 'Validation'], loc='upper right')
     plt.savefig(dir_path+"/"+'loss_'+str(x)+'.png', bbox_inches='tight', dpi=300)
     return plt.show()
+
+
+def plot_first_frames(images, labels):
+
+    fig, axes = plt.subplots(nrows=1, ncols=5, figsize=(15, 5))
+    axes = axes.flatten()
+
+    # Generate a list of 5 random integers between 0 and the length of the images variable
+    indices = [0, 1, 2, 3, 4] #np.random.randint(0, len(images), 5) 5
+
+    # Loop over the indices and plot each frame with its corresponding label
+    for i, index in enumerate(indices):
+        axes[i].imshow(images[index])
+        # if labels[index] == 0:
+        #     label_name = 'Forward'
+        # elif labels[index] == 1:
+        axes[i].set_title("Label: " + str(labels[index]))
+
+    plt.tight_layout()
+    plt.show()
+    plt.savefig('first_five_frames.png')
+    
+def plot_random_frames(images, labels):
+
+    fig, axes = plt.subplots(nrows=1, ncols=5, figsize=(15, 5))
+    axes = axes.flatten()
+
+    # Generate a list of 5 random integers between 0 and the length of the images variable
+    indices = np.random.randint(0, len(images), 5)
+
+    # Loop over the indices and plot each frame with its corresponding label
+    for i, index in enumerate(indices):
+        axes[i].imshow(images[index])
+        axes[i].set_title("Label: " + str(labels[index]))
+
+    plt.tight_layout()
+    plt.show()
+    plt.savefig('five_random_frames.png')

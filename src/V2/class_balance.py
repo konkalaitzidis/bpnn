@@ -21,8 +21,8 @@ def check_class_imbalance(df_new_annotations):
     # display the plot
     plt.show()
 
-    print("Behavior Main is {:.1f}%" .format((class_counts[0]/total_counts)*100))
-    print("Behavior Left is {:.1f}%" .format((class_counts[1]/total_counts)*100))
-    print("Behavior Right is {:.1f}%" .format((class_counts[2]/total_counts)*100))
+    print("Behavior Forward is {:.1f}%" .format((class_counts[0]/total_counts)*100))
+    print("Behavior Right is {:.1f}%" .format((class_counts[1]/total_counts)*100))
+    print("Behavior Left is {:.1f}%" .format((class_counts[2]/total_counts)*100))
     
     return class_counts, total_counts
