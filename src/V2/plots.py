@@ -40,7 +40,7 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
     plt.title('Confusion Matrix - Training, Turning Labels')
     plt.xlabel('Predicted Labels')
     plt.ylabel('True Labels')
-    plt.savefig(dir_path+"/"+'cm_train'+str(experiment_ID)+'.png', bbox_inches='tight', dpi=300)
+    plt.savefig(dir_path+"/"+'cm_train_'+str(experiment_ID)+'.png', bbox_inches='tight', dpi=300)
     plt.show()
     
     # Repeat for validation data
@@ -52,7 +52,7 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
     plt.title('Confusion Matrix - Validation, Turning Labels')
     plt.xlabel('Predicted Labels')
     plt.ylabel('True Labels')
-    plt.savefig(dir_path+"/"+'cm_val'+str(experiment_ID)+'.png', bbox_inches='tight', dpi=300)
+    plt.savefig(dir_path+"/"+'cm_val_'+str(experiment_ID)+'.png', bbox_inches='tight', dpi=300)
     plt.show()
     
     print("F1 score is: {:.3f}" .format(f1_score(val_labels, val_predicted_labels, average='micro')))
@@ -70,7 +70,7 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
 #     plt.savefig(dir_path+"/"+'model_accuracy_'+str(x)+'.png', bbox_inches='tight', dpi=300)
 #     return plt.show()
 
-def plot_accuracy(x, history):
+def plot_accuracy(experiment_ID, history):
     dir_path = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/accuracy"
 
     sns.set_style("whitegrid")
@@ -84,9 +84,9 @@ def plot_accuracy(x, history):
     plt.show()
 
 
-def plot_loss(x, history):
-    dir_path = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/output/loss"
-
+def plot_loss(experiment_ID, history):
+    dir_path = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/loss"
+    fig, ax = plt.subplots(figsize=(10,6))
     sns.set_style('whitegrid')
     sns.set_palette('husl')
 
