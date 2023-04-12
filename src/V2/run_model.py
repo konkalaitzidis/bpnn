@@ -7,7 +7,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 import pickle
 import csv # CSV module is used for working with CSV (Comma Separated Values) files in Python.
 # from f1_score import f1_score
-
+import os
 
 
 def model_execution(params):
@@ -43,24 +43,26 @@ def model_execution(params):
     print(f"Execution time: {int(hours)} hours, {int(minutes)} minutes, {int(seconds)} seconds")
 
     
-    
+    dir_name = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/pickles"
+    model_save_name = 'BPNN_V2_model.h5'
     print("Now saving model data to pickles. Please wait...")
-    model.save('BPNN_V2_model.h5')
+    model.save(f"{dir_name}/{model_save_name}.png")
     
+    dir_name_pickles = "src/V2/output/pickels"
     # Save the history object to a pickle file
-    with open('history.pkl', 'wb') as f:
+    with open(os.path.join(dir_name, 'history.pkl'), 'wb') as f:
         pickle.dump(history.history, f)
     
-    with open('train_images.pkl', 'wb') as f:
+    with open(os.path.join(dir_name, 'train_images.pkl'), 'wb') as f:
         pickle.dump(train_images, f)
 
-    with open('val_images.pkl', 'wb') as f:
+    with open(os.path.join(dir_name, 'val_images.pkl'), 'wb') as f:
         pickle.dump(val_images, f)
 
-    with open('train_labels.pkl', 'wb') as f:
+    with open(os.path.join(dir_name, 'train_labels.pkl'), 'wb') as f:
         pickle.dump(train_labels, f)
         
-    with open('val_labels.pkl', 'wb') as f:
+    with open(os.path.join(dir_name, 'val_labels.pkl'), 'wb') as f:
         pickle.dump(val_labels, f)
         
     print("Done!")
