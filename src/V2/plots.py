@@ -10,7 +10,7 @@ from sklearn.metrics import f1_score
 
 
 
-def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labels, train_images, val_images):
+def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labels, train_images, val_images, base_model_cm_dir, model_path):
     
     dir_path = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/cm"
     
@@ -24,7 +24,7 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
     train_labels = np.argmax(train_labels, axis=1)
     val_labels = np.argmax(val_labels, axis=1)
 
-    model = load_model('BPNN_V2_model.h5')
+    model = load_model(model_path+"/BPNN_base_model_v1.h5")
     
     # Predict the class labels of the training images using the trained model
     train_predicted_labels = np.argmax(model.predict(train_images), axis=1)
@@ -40,7 +40,7 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
     plt.title('Confusion Matrix - Training, Turning Labels')
     plt.xlabel('Predicted Labels')
     plt.ylabel('True Labels')
-    plt.savefig(dir_path+"/"+'cm_train_'+str(experiment_ID)+'.png', bbox_inches='tight', dpi=300)
+    plt.savefig(base_model_cm_dir+"/"+'cm_train_'+str(experiment_ID)+'.png', bbox_inches='tight', dpi=300)
     plt.show()
     
     # Repeat for validation data
@@ -52,7 +52,7 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
     plt.title('Confusion Matrix - Validation, Turning Labels')
     plt.xlabel('Predicted Labels')
     plt.ylabel('True Labels')
-    plt.savefig(dir_path+"/"+'cm_val_'+str(experiment_ID)+'.png', bbox_inches='tight', dpi=300)
+    plt.savefig(base_model_cm_dir+"/"+'cm_val_'+str(experiment_ID)+'.png', bbox_inches='tight', dpi=300)
     plt.show()
     
     print("F1 score is: {:.3f}" .format(f1_score(val_labels, val_predicted_labels, average='micro')))
@@ -70,8 +70,10 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
 #     plt.savefig(dir_path+"/"+'model_accuracy_'+str(x)+'.png', bbox_inches='tight', dpi=300)
 #     return plt.show()
 
-def plot_accuracy(experiment_ID, history):
+def plot_accuracy(experiment_ID, history, base_model_acc_dir):
     dir_path = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/accuracy"
+    
+
 
     sns.set_style("whitegrid")
     fig, ax = plt.subplots(figsize=(10,6))
@@ -80,11 +82,11 @@ def plot_accuracy(experiment_ID, history):
     ax.set_title('Model Accuracy')
     ax.set_xlabel('Epoch')
     ax.set_ylabel('Accuracy')
-    plt.savefig(dir_path+"/"+"model_accuracy_"+str(experiment_ID)+".png", bbox_inches='tight', dpi=300)
+    plt.savefig(base_model_acc_dir+"/"+"model_accuracy_"+str(experiment_ID)+".png", bbox_inches='tight', dpi=300)
     plt.show()
 
 
-def plot_loss(experiment_ID, history):
+def plot_loss(experiment_ID, history, base_model_loss_dir):
     dir_path = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/loss"
     fig, ax = plt.subplots(figsize=(10,6))
     sns.set_style('whitegrid')
@@ -96,7 +98,7 @@ def plot_loss(experiment_ID, history):
     plt.ylabel('loss')
     plt.xlabel('Epoch')
     plt.legend(['Train', 'Validation'], loc='upper right')
-    plt.savefig(dir_path+"/"+'loss_'+str(experiment_ID)+'.png', bbox_inches='tight', dpi=300)
+    plt.savefig(base_model_loss_dir+"/"+'loss_'+str(experiment_ID)+'.png', bbox_inches='tight', dpi=300)
     return plt.show()
 
 
@@ -119,7 +121,7 @@ def plot_first_frames(images, labels):
 
     plt.tight_layout()
     plt.show()
-    plt.savefig('first_five_frames.png')
+    # plt.savefig('first_five_frames.png')
     
     
     
@@ -138,7 +140,7 @@ def plot_random_frames(images, labels):
 
     plt.tight_layout()
     plt.show()
-    plt.savefig('five_random_frames.png')
+    # plt.savefig('five_random_frames.png')
 
                 
                 
