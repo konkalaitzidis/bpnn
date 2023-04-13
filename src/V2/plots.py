@@ -6,7 +6,7 @@ import seaborn as sns
 from sklearn.metrics import confusion_matrix
 from keras.models import load_model
 from sklearn.metrics import f1_score
-
+from save_model_info import save_training_info
 
 
 
@@ -54,9 +54,12 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
     plt.ylabel('True Labels')
     plt.savefig(base_model_cm_dir+"/"+'cm_val_'+str(experiment_ID)+'.png', bbox_inches='tight', dpi=300)
     plt.show()
-    
-    print("F1 score is: {:.3f}" .format(f1_score(val_labels, val_predicted_labels, average='micro')))
-    
+    f1_score_val = f1_score(val_labels, val_predicted_labels, average='micro')
+    print("F1 score is: {:.3f}" .format(f1_score_val))
+    return f1_score_val
+    # from save_model_info import save_training_info
+    # return f1_score
+
     
 # def plot_accuracy(x, history):
 #     dir_path = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/accuracy"
