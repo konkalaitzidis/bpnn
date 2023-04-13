@@ -10,7 +10,7 @@ from sklearn.metrics import f1_score
 
 
 
-def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labels, train_images, val_images, base_model_cm_dir, model_path):
+def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labels, train_images, val_images, base_model_cm_dir, model_path, model_version):
     
     dir_path = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/cm"
     
@@ -24,7 +24,7 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
     train_labels = np.argmax(train_labels, axis=1)
     val_labels = np.argmax(val_labels, axis=1)
 
-    model = load_model(model_path+"/BPNN_base_model_v1.h5")
+    model = load_model(model_path+"/"+model_version+".h5")
     
     # Predict the class labels of the training images using the trained model
     train_predicted_labels = np.argmax(model.predict(train_images), axis=1)

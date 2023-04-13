@@ -7,7 +7,7 @@ import pickle
 import csv # CSV module is used for working with CSV (Comma Separated Values) files in Python.
 import os
 
-def base_model_execution(base_params, save_dir):    
+def base_model_execution(base_params, save_dir, model_version):    
     
     model = base_params['model']
     tf = base_params['tf']
@@ -41,7 +41,7 @@ def base_model_execution(base_params, save_dir):
 
     
     # dir_name = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/pickles"
-    model_save_name = 'BPNN_base_model_v1.h5'
+    model_save_name = str(model_version)+'.h5'
     print("Now saving model data to pickles. Please wait...")
     model.save(f"{save_dir}/{model_save_name}")
     

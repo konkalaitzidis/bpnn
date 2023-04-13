@@ -18,7 +18,7 @@ def check_class_imbalance(df_new_annotations, experiment_ID, save_dir):
     plt.ylabel('Percentage of Instances')
     plt.title('Distribution of Class Labels')
     
-    dir_name = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/balance"
+    # dir_name = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/balance"
     plt.savefig(f"{save_dir}/{experiment_ID}_class_distribution.png", dpi=300, bbox_inches='tight')
 
     # display the plot
@@ -45,7 +45,7 @@ def check_distribution_among_datasets(labels, experiment_ID, save_dir, dataset_t
     plt.ylabel('Percentage of Instances')
     plt.title('Distribution of Class Labels in '+ str(dataset_type))
     
-    dir_name = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/balance"
+    # dir_name = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/balance"
     plt.savefig(f"{save_dir}/{experiment_ID}_class_distribution_"+str(dataset_type)+".png", dpi=300, bbox_inches='tight')
 
     # display the plot
