@@ -25,9 +25,9 @@ def check_class_imbalance(df_new_annotations, experiment_ID, save_dir):
     plt.show()
 
     # print the percentage of each class
-    print("Behavior Forward is {:.1f}%" .format((class_counts[0]/total_counts)*100))
-    print("Behavior Right is {:.1f}%" .format((class_counts[1]/total_counts)*100))
-    print("Behavior Left is {:.1f}%" .format((class_counts[2]/total_counts)*100))
+    print("Behavior Main Corridor is {:.1f}%" .format((class_counts[0]/total_counts)*100))
+    print("Behavior Left Corridor is {:.1f}%" .format((class_counts[1]/total_counts)*100))
+    print("Behavior Right Corridor is {:.1f}%" .format((class_counts[2]/total_counts)*100))
     
     return class_counts, total_counts
 
