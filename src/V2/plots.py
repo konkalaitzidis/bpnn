@@ -117,10 +117,11 @@ def plot_first_frames(images, labels):
     # Loop over the indices and plot each frame with its corresponding label
     for i, index in enumerate(indices):
         axes[i].imshow(images[index])
-        # if labels[index] == 0:
-        #     label_name = 'Forward'
-        # elif labels[index] == 1:
-        axes[i].set_title("Label: " + str(labels[index]))
+        label_name = str(labels[indices[i]])
+        # Convert binary labels to the desired format
+        if isinstance(labels[indices[i]], np.ndarray):
+            label_name = np.argmax(labels[indices[i]])
+        axes[i].set_title("Label: " + str(label_name))
 
     plt.tight_layout()
     plt.show()
@@ -139,7 +140,11 @@ def plot_random_frames(images, labels):
     # Loop over the indices and plot each frame with its corresponding label
     for i, index in enumerate(indices):
         axes[i].imshow(images[index])
-        axes[i].set_title("Label: " + str(labels[index]))
+        label_name = str(labels[indices[i]])
+        # Convert binary labels to the desired format
+        if isinstance(labels[indices[i]], np.ndarray):
+            label_name = np.argmax(labels[indices[i]])
+        axes[i].set_title("Label: " + str(label_name))
 
     plt.tight_layout()
     plt.show()
