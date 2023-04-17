@@ -37,7 +37,7 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
 
     plt.figure(figsize=(8, 6))
     sns.heatmap(cm_train, annot=True, cmap='Blues', fmt='g', xticklabels=no_of_behaviors, yticklabels=no_of_behaviors)
-    plt.title('Confusion Matrix - Training, Turning Labels')
+    plt.title('Confusion Matrix - Training, Location Labels')
     plt.xlabel('Predicted Labels')
     plt.ylabel('True Labels')
     plt.savefig(base_model_cm_dir+"/"+'cm_train_'+str(experiment_ID)+'.png', bbox_inches='tight', dpi=300)
@@ -49,7 +49,7 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
     # Plot the confusion matrix as a heatmap
     plt.figure(figsize=(8, 6))
     sns.heatmap(cm_val, annot=True, cmap='Blues', fmt='g', xticklabels=no_of_behaviors, yticklabels=no_of_behaviors)
-    plt.title('Confusion Matrix - Validation, Turning Labels')
+    plt.title('Confusion Matrix - Validation, Location Labels')
     plt.xlabel('Predicted Labels')
     plt.ylabel('True Labels')
     plt.savefig(base_model_cm_dir+"/"+'cm_val_'+str(experiment_ID)+'.png', bbox_inches='tight', dpi=300)
@@ -106,7 +106,7 @@ def plot_loss(experiment_ID, history, base_model_loss_dir):
 
 
 
-def plot_first_frames(images, labels):
+def plot_first_frames(images, labels, vmin, vmax):
 
     fig, axes = plt.subplots(nrows=1, ncols=5, figsize=(15, 5))
     axes = axes.flatten()
@@ -116,7 +116,7 @@ def plot_first_frames(images, labels):
 
     # Loop over the indices and plot each frame with its corresponding label
     for i, index in enumerate(indices):
-        axes[i].imshow(images[index])
+        axes[i].imshow(images[index], vmin = vmin, vmax = vmax)
         label_name = str(labels[indices[i]])
         # Convert binary labels to the desired format
         if isinstance(labels[indices[i]], np.ndarray):
@@ -129,7 +129,7 @@ def plot_first_frames(images, labels):
     
     
     
-def plot_random_frames(images, labels):
+def plot_random_frames(images, labels, vmin, vmax):
 
     fig, axes = plt.subplots(nrows=1, ncols=5, figsize=(15, 5))
     axes = axes.flatten()
@@ -139,7 +139,7 @@ def plot_random_frames(images, labels):
 
     # Loop over the indices and plot each frame with its corresponding label
     for i, index in enumerate(indices):
-        axes[i].imshow(images[index])
+        axes[i].imshow(images[index], vmin = vmin, vmax = vmax)
         label_name = str(labels[indices[i]])
         # Convert binary labels to the desired format
         if isinstance(labels[indices[i]], np.ndarray):
