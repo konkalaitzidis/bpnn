@@ -13,17 +13,18 @@ def load_video_data(s3_calcium_url):
         cache_storage="nwb-cache",  # Local folder for the cache
     )
             
-#     with fs.open(s3_calcium_url, "rb") as f:
-#         with h5py.File(f) as file:
-#             analysis_group = file["analysis"]
-#             recording_group_name = list(analysis_group.keys())[0]
-#             recording_group = analysis_group[recording_group_name]
-#             print("working..")
-#             video_data = np.array(recording_group["data"][:])
+    # with fs.open(s3_calcium_url, "rb") as f:
+    #     with h5py.File(f) as file:
+    #         analysis_group = file["analysis"]
+    #         recording_group_name = list(analysis_group.keys())[0]
+    #         # recording_group = analysis_group[recording_group_name]
+    #         # print("working..")
+    #         # video_data = np.array(recording_group["data"][:])
+    #         print(recording_group_name)
 
     with fs.open(s3_calcium_url, "rb") as f:
         with h5py.File(f) as file:
-            video_data = np.array(file["analysis/recording_20211028_181307-PP-BP-MC/data"])
+            video_data = np.array(file["analysis/recording_20211026_142935-PP-BP-MC/data"])
 
 
     # with fs.open(s3_calcium_url, "rb") as f:

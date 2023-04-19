@@ -45,6 +45,10 @@ def construct_model(input_shape, num_classes, name):
     model.summary()
     
     
+    print("Compiling model...")
+    model.compile(loss='categorical_crossentropy', optimizer=tf.keras.optimizers.legacy.Adam(), metrics=['accuracy'])
+    
+    
 #     model = InceptionV3(include_top=False, input_shape=input_shape, weights=None)
     
 #     # Freeze the weights of the pre-trained layers

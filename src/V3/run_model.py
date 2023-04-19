@@ -28,14 +28,14 @@ def model_execution(params, save_dir, model_version):
     # f1_score = f1_score()
 
     
-    print("Compiling model...")
-    model.compile(loss='categorical_crossentropy', optimizer=tf.keras.optimizers.legacy.Adam(), metrics=['accuracy'])
+    # print("Compiling model...")
+    # model.compile(loss='categorical_crossentropy', optimizer=tf.keras.optimizers.legacy.Adam(), metrics=['accuracy'])
     
-    # early_stopping = EarlyStopping(monitor='val_loss', patience=3, verbose=1, mode='min')
+    early_stopping = EarlyStopping(monitor='val_loss', patience=3, verbose=1, mode='min')
     
     
     print("Running model. Go grab a coffee or smth.")
-    history = model.fit(train_images, train_labels, epochs=epochs, batch_size=batch_size, validation_data=validation_data) #callbacks=[early_stopping]) 
+    history = model.fit(train_images, train_labels, epochs=epochs, batch_size=batch_size, validation_data=validation_data, callbacks=[early_stopping])
     
     end_time = time.time()
     execution_time = end_time - start_time
