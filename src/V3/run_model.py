@@ -1,13 +1,14 @@
-import tensorflow.compat.v1 as tf
-import time # for time-related functions
-from tensorflow.keras.optimizers.legacy import Adam
-from tensorflow.keras import datasets, layers, models
-from tensorflow.keras.utils import plot_model
-from tensorflow.keras.callbacks import EarlyStopping
-import pickle
-import csv # CSV module is used for working with CSV (Comma Separated Values) files in Python.
+import csv  # CSV module is used for working with CSV (Comma Separated Values) files in Python.
 # from f1_score import f1_score
 import os
+import pickle
+import time  # for time-related functions
+
+import tensorflow.compat.v1 as tf
+from tensorflow.keras import datasets, layers, models
+from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.keras.optimizers.legacy import Adam
+from tensorflow.keras.utils import plot_model
 
 
 def model_execution(params, save_dir, model_version):

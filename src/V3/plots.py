@@ -2,12 +2,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
-# for generating a confusion matrix
-from sklearn.metrics import confusion_matrix
 from keras.models import load_model
-from sklearn.metrics import f1_score
-from save_model_info import save_training_info
+# for generating a confusion matrix
+from sklearn.metrics import confusion_matrix, f1_score
 
+from save_model_info import save_training_info
 
 
 def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labels, train_images, val_images, base_model_cm_dir, model_path, model_version):

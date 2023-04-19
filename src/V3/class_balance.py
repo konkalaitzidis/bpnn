@@ -1,7 +1,8 @@
-import pandas as pd
 import os
-import seaborn as sns
+
 import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
 
 
 def check_class_imbalance(df_new_annotations, experiment_ID, save_dir):

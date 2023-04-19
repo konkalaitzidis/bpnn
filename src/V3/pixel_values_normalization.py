@@ -1,5 +1,6 @@
 import numpy as np
 
+
 # normalize the pixel values of the calcium video
 def normalize_video(video_data):
     
