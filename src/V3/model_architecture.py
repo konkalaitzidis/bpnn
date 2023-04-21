@@ -42,10 +42,10 @@ def construct_model(input_shape, num_classes, name):
     model.add(Dense(num_classes, activation='softmax'))
 
 #     # Complete model 
-    model.summary()
+    # model.summary()
     
     
-    print("Compiling model...")
+    print("Compiling model...\n")
     model.compile(loss='categorical_crossentropy', optimizer=tf.keras.optimizers.legacy.Adam(), metrics=['accuracy'])
     
     

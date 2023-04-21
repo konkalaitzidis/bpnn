@@ -72,23 +72,22 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
 #     plt.savefig(dir_path+"/"+'model_accuracy_'+str(x)+'.png', bbox_inches='tight', dpi=300)
 #     return plt.show()
 
-def plot_accuracy(experiment_ID, history, base_model_acc_dir):
+def plot_accuracy(experiment_ID, history, base_model_acc_dir, i):
     dir_path = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/accuracy"
     
-
-
     sns.set_style("whitegrid")
     fig, ax = plt.subplots(figsize=(10,6))
-    sns.lineplot(x=range(1, len(history['accuracy'])+1), y=history['accuracy'], label='Training Accuracy')
-    sns.lineplot(x=range(1, len(history['val_accuracy'])+1), y=history['val_accuracy'], label='Validation Accuracy')
-    ax.set_title('Model Accuracy')
+    sns.lineplot(x=range(1, len(history['accuracy'])+1), y=history['accuracy'], label=f'Train Fold {i+1}')
+    sns.lineplot(x=range(1, len(history['val_accuracy'])+1), y=history['val_accuracy'], label=f'Val Fold {i+1}')
+    ax.set_title('Model Accuracy '+"Fold"+str(i))
     ax.set_xlabel('Epoch')
     ax.set_ylabel('Accuracy')
     plt.savefig(base_model_acc_dir+"/"+"model_accuracy_"+str(experiment_ID)+".png", bbox_inches='tight', dpi=300)
+    plt.legend(loc='lower right')
     plt.show()
 
 
-def plot_loss(experiment_ID, history, base_model_loss_dir):
+def plot_loss(experiment_ID, history, base_model_loss_dir, i):
     dir_path = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/loss"
     fig, ax = plt.subplots(figsize=(10,6))
     sns.set_style('whitegrid')
