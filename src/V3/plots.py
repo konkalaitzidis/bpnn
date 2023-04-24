@@ -149,7 +149,8 @@ def plot_random_frames(images, labels, vmin, vmax):
     # plt.savefig('five_random_frames.png')
 
                 
-                
+
+
                 
 
 # def plot_frames(images, labels, indices, title):
