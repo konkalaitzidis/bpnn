@@ -28,7 +28,7 @@ def run_k_fold(params,
                val_loss_all,
                train_acc_all,
                val_acc_all,
-              average_score):
+               average_score_list):
     
     
     images = params['images']
@@ -42,11 +42,10 @@ def run_k_fold(params,
     
     
     # Define the EarlyStopping callback to stop training when the validation loss stops decreasing
-    # early_stopping = EarlyStopping(monitor='val_loss', patience=3, verbose=1, mode='min')
+    early_stopping = EarlyStopping(monitor='val_loss', patience=6, verbose=1, mode='min')
 
     # Define the KFold cross-validator
     kf = KFold(n_splits=num_folds, shuffle=shuffle)
-    
     
     
     for fold, (train_idx, test_idx) in enumerate(kf.split(images), 1):
@@ -76,10 +75,10 @@ def run_k_fold(params,
         
         # history = model.fit(train_images, train_labels, epochs=epochs, batch_size=batch_size, validation_data=(val_images, val_labels), callbacks=[early_stopping]) # callbacks=[early_stopping])
         
-        history = model.fit_generator(train_generator, 
+        history = model.fit(train_generator, 
                                       epochs=epochs, 
-                                      validation_data=val_generator)
-                                      #callbacks=[early_stopping])
+                                      validation_data=val_generator,
+                                      callbacks=[early_stopping])
         
         # all_histories.append(history)  # save the history object to the list
 
@@ -94,7 +93,7 @@ def run_k_fold(params,
         # Evaluate the model on the validation set
         print("\nEvaluating model.")
         accuracy_score = model.evaluate_generator(val_generator, verbose=0)
-        average_score.append(average_score)
+        average_score_list.append(accuracy_score[1])
         
         # accuracy_score = model.evaluate(val_images, val_labels, verbose=0)
         print(f'Validation accuracy: {accuracy_score[1]:.4f}\n')
@@ -109,7 +108,7 @@ def run_k_fold(params,
         gc.collect()
         
         
-    return train_loss_all, val_loss_all, train_acc_all, val_acc_all, np.mean(average_score)
+    return train_loss_all, val_loss_all, train_acc_all, val_acc_all, average_score_list
     print("\nDone!\n")
     
     
