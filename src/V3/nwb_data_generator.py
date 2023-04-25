@@ -3,6 +3,7 @@ import h5py
 from tensorflow.keras.utils import Sequence
 
 class NWBDataGenerator(Sequence):
+
     def __init__(self, images, labels, idx, batch_size=32):
         self.images = images
         self.labels = labels

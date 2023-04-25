@@ -27,7 +27,8 @@ def run_k_fold(params,
                train_loss_all,
                val_loss_all,
                train_acc_all,
-               val_acc_all):
+               val_acc_all,
+              average_score):
     
     
     images = params['images']
@@ -93,6 +94,7 @@ def run_k_fold(params,
         # Evaluate the model on the validation set
         print("\nEvaluating model.")
         accuracy_score = model.evaluate_generator(val_generator, verbose=0)
+        average_score.append(average_score)
         
         # accuracy_score = model.evaluate(val_images, val_labels, verbose=0)
         print(f'Validation accuracy: {accuracy_score[1]:.4f}\n')
@@ -107,7 +109,7 @@ def run_k_fold(params,
         gc.collect()
         
         
-    return train_loss_all, val_loss_all, train_acc_all, val_acc_all
+    return train_loss_all, val_loss_all, train_acc_all, val_acc_all, np.mean(average_score)
     print("\nDone!\n")
     
     
