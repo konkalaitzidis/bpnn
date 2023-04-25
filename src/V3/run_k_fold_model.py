@@ -23,22 +23,25 @@ import gc
 
 
 
-def run_k_fold(images, 
-               labels, 
-               num_folds, 
-               shuffle, 
-               input_shape, 
-               num_classes, 
-               name, 
-               epochs,
+def run_k_fold(params,
                train_loss_all,
                val_loss_all,
                train_acc_all,
                val_acc_all):
     
     
+    images = params['images']
+    labels = params['labels']
+    num_folds = params['number_of_folds']
+    shuffle = params['shuffle_data']
+    input_shape = params['input_shape']
+    num_classes = params['number_of_classes']
+    name = params['model_name']
+    epochs = params['epochs']
+    
+    
     # Define the EarlyStopping callback to stop training when the validation loss stops decreasing
-    early_stopping = EarlyStopping(monitor='val_loss', patience=3, verbose=1, mode='min')
+    # early_stopping = EarlyStopping(monitor='val_loss', patience=3, verbose=1, mode='min')
 
     # Define the KFold cross-validator
     kf = KFold(n_splits=num_folds, shuffle=shuffle)
@@ -74,8 +77,8 @@ def run_k_fold(images,
         
         history = model.fit_generator(train_generator, 
                                       epochs=epochs, 
-                                      validation_data=val_generator, 
-                                      callbacks=[early_stopping])
+                                      validation_data=val_generator)
+                                      #callbacks=[early_stopping])
         
         # all_histories.append(history)  # save the history object to the list
 
@@ -103,9 +106,8 @@ def run_k_fold(images,
         # Run the garbage collector to free up memory
         gc.collect()
         
-        return train_loss_all, val_loss_all, train_acc_all, val_acc_all
         
-    
+    return train_loss_all, val_loss_all, train_acc_all, val_acc_all
     print("\nDone!\n")
     
     

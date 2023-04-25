@@ -5,8 +5,10 @@ import seaborn as sns
 from keras.models import load_model
 # for generating a confusion matrix
 from sklearn.metrics import confusion_matrix, f1_score
-
+from matplotlib.gridspec import GridSpec
 from save_model_info import save_training_info
+from skimage.transform import resize
+
 
 
 def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labels, train_images, val_images, base_model_cm_dir, model_path, model_version):
@@ -72,6 +74,40 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
 #     plt.savefig(dir_path+"/"+'model_accuracy_'+str(x)+'.png', bbox_inches='tight', dpi=300)
 #     return plt.show()
 
+def plot_accuracy_k_fold(experiment_ID, model_acc_dir, train_acc_all, val_acc_all, num_folds):
+    fig, ax = plt.figure(figsize=(8, 6)) 
+    sns.set_style('whitegrid')
+    sns.set_palette('husl')
+    for i in range(num_folds):
+        sns.lineplot(x=range(num_epochs), y=train_acc_all[i], label=f'Train Acc Fold {i+1}',  ax=ax)
+        sns.lineplot(x=range(num_epochs), y=val_acc_all[i], label=f'Val Acc Fold {i+1}',  ax=ax)
+    # plt.title('Training and Validation Accuracy')
+    # plt.xlabel('Epoch')
+    # plt.ylabel('Accuracy')
+    ax.set(title='Training and Validation Accuracy', xlabel='Epoch', ylabel='Accuracy')
+    plt.legend(loc='lower right')
+    plt.savefig(model_acc_dir+"/"+"training-validation-Accuracy_"+str(experiment_ID)+".svg", bbox_inches='tight', dpi=300)
+    return plt.show()
+    
+
+
+def plot_loss_k_fold(experiment_ID, model_acc_dir, train_acc_all, val_acc_all, num_folds):
+
+    fig, ax = plt.subplots(figsize=(8, 6))
+    sns.set_style('whitegrid')
+    sns.set_palette('husl')
+    for i in range(num_folds):
+        sns.lineplot(x=range(num_epochs), y=train_acc_all[i], label=f'Train Acc Fold {i+1}', ax=ax)
+        sns.lineplot(x=range(num_epochs), y=val_acc_all[i], label=f'Val Acc Fold {i+1}', ax=ax)
+    ax.set(title='Training and Validation Loss', xlabel='Epoch', ylabel='Accuracy')
+    plt.legend(loc='lower right')
+    plt.savefig(model_acc_dir+"/"+"training-validation-loss_"+str(experiment_ID)+".svg", bbox_inches='tight', dpi=300)
+    return plt.show()
+
+
+
+
+
 def plot_accuracy(experiment_ID, history, base_model_acc_dir, i):
     dir_path = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/accuracy"
     
@@ -84,7 +120,7 @@ def plot_accuracy(experiment_ID, history, base_model_acc_dir, i):
     ax.set_ylabel('Accuracy')
     plt.savefig(base_model_acc_dir+"/"+"model_accuracy_"+str(experiment_ID)+".png", bbox_inches='tight', dpi=300)
     plt.legend(loc='lower right')
-    plt.show()
+    return plt.show()
 
 
 def plot_loss(experiment_ID, history, base_model_loss_dir, i):
@@ -104,33 +140,49 @@ def plot_loss(experiment_ID, history, base_model_loss_dir, i):
 
 
 
-def plot_first_frames(images, labels, vmin, vmax):
+def plot_first_frames(images, labels, vmin, vmax, data_file):
 
     fig, axes = plt.subplots(nrows=1, ncols=5, figsize=(15, 5))
     axes = axes.flatten()
+    fig.suptitle("The First 5 Images from "+str(data_file), fontsize=16)
 
     # Generate a list of 5 random integers between 0 and the length of the images variable
     indices = [0, 1, 2, 3, 4] #np.random.randint(0, len(images), 5) 5
 
     # Loop over the indices and plot each frame with its corresponding label
     for i, index in enumerate(indices):
+
         axes[i].imshow(images[index], vmin = vmin, vmax = vmax)
-        label_name = str(labels[indices[i]])
+        label_name = labels[indices[i]]
+
+        if label_name == 0:
+            label_name = "Main Corr"
+        elif label_name == 1:
+            label_name = "Left Corr"
+        else:
+            label_name = "Right Corr"
+
+
         # Convert binary labels to the desired format
         if isinstance(labels[indices[i]], np.ndarray):
             label_name = np.argmax(labels[indices[i]])
-        axes[i].set_title("Label: " + str(label_name))
+        axes[i].set_title("Label: " + str(label_name), fontsize=12)
+        axes[i].tick_params(axis='both', which='both', length=0)
+        axes[i].set_xticklabels([])
+        axes[i].set_yticklabels([])
 
-    plt.tight_layout()
+
+
+    plt.subplots_adjust(wspace=0.05, hspace=0)
     plt.show()
-    # plt.savefig('first_five_frames.png')
+
+
     
-    
-    
-def plot_random_frames(images, labels, vmin, vmax):
+def plot_random_frames(images, labels, vmin, vmax, data_file):
 
     fig, axes = plt.subplots(nrows=1, ncols=5, figsize=(15, 5))
     axes = axes.flatten()
+    fig.suptitle("5 random images from "+str(data_file), fontsize=16)
 
     # Generate a list of 5 random integers between 0 and the length of the images variable
     indices = np.random.randint(0, len(images), 5)
@@ -138,16 +190,35 @@ def plot_random_frames(images, labels, vmin, vmax):
     # Loop over the indices and plot each frame with its corresponding label
     for i, index in enumerate(indices):
         axes[i].imshow(images[index], vmin = vmin, vmax = vmax)
-        label_name = str(labels[indices[i]])
+        label_name = labels[indices[i]]
+        
+        if label_name == 0:
+            label_name = "Main Corr"
+        elif label_name == 1:
+            label_name = "Left Corr"
+        else:
+            label_name = "Right Corr"
+
         # Convert binary labels to the desired format
         if isinstance(labels[indices[i]], np.ndarray):
             label_name = np.argmax(labels[indices[i]])
-        axes[i].set_title("Label: " + str(label_name))
+        axes[i].set_title("Label: " + str(label_name), fontsize=12)
+        axes[i].tick_params(axis='both', which='both', length=0)
+        axes[i].set_xticklabels([])
+        axes[i].set_yticklabels([])
 
-    plt.tight_layout()
+    plt.subplots_adjust(wspace=0.05, hspace=0)
     plt.show()
     # plt.savefig('five_random_frames.png')
 
+    
+def plot_image_pixel_values(img):
+    downsampled_img = resize(img, (int(img.shape[0]/16), int(img.shape[1]/16)), anti_aliasing=True)
+    
+    fig, ax = plt.subplots(figsize=(10, 8))
+    ax = sns.heatmap(downsampled_img, cmap="gray", annot=True,  fmt=".2f", linewidth=.5, annot_kws={"fontsize": 6})
+    ax.set_title("Image Heatmap")
+    ax.set(xlabel="width", ylabel="height")
                 
 
 
