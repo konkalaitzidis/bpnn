@@ -25,8 +25,12 @@ def load_video_data(s3_calcium_url):
     with fs.open(s3_calcium_url, "rb") as f:
         with h5py.File(f) as file:
             video_data = np.array(file["analysis/recording_20211026_142935-PP-BP-MC/data"])
+            
+            video_data = video_data[:, 1:357, 35:433]
 
-
+    video_data = np.stack(video_data, ... )
+            
+            
     # with fs.open(s3_calcium_url, "rb") as f:
     #         with h5py.File(f) as file:
     #             video_data = np.array(file["analysis/recording_20211028_181307-PP-BP-MC/data"])
