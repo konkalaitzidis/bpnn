@@ -42,7 +42,7 @@ def run_k_fold(params,
     
     
     # Define the EarlyStopping callback to stop training when the validation loss stops decreasing
-    early_stopping = EarlyStopping(monitor='val_loss', patience=6, verbose=1, mode='min')
+    # early_stopping = EarlyStopping(monitor='val_loss', patience=6, verbose=1, mode='min')
 
     # Define the KFold cross-validator
     kf = KFold(n_splits=num_folds, shuffle=shuffle)
@@ -76,9 +76,9 @@ def run_k_fold(params,
         # history = model.fit(train_images, train_labels, epochs=epochs, batch_size=batch_size, validation_data=(val_images, val_labels), callbacks=[early_stopping]) # callbacks=[early_stopping])
         
         history = model.fit(train_generator, 
-                                      epochs=epochs, 
-                                      validation_data=val_generator,
-                                      callbacks=[early_stopping])
+                            epochs=epochs,
+                            validation_data=val_generator)
+                            # callbacks=[early_stopping])
         
         # all_histories.append(history)  # save the history object to the list
 

@@ -10,7 +10,7 @@ def normalize_video(video_data):
     normalized_video_data = (video_data - min_pixel_value) / range_pixel_value
     
     # Verify the normalization by checking the minimum and maximum values
-    print('Minimum pixel value: {:.3f}' .format(np.min(normalized_video_data)))
-    print('Maximum pixel value:', np.max(normalized_video_data))
+    # print('Minimum pixel value: {:.3f}' .format(np.min(normalized_video_data)))
+    # print('Maximum pixel value:', np.max(normalized_video_data))
     
     return normalized_video_data
