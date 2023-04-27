@@ -8,7 +8,33 @@ from sklearn.metrics import confusion_matrix, f1_score
 from matplotlib.gridspec import GridSpec
 from save_model_info import save_training_info
 from skimage.transform import resize
+from sklearn.metrics import confusion_matrix
 
+
+def plot_cm_k_fold(val_generator, no_of_behaviors, experiment_ID, model_cm_dir, model):
+    
+
+    print("Plotting confusion matrix\n")
+    print(val_generator)
+
+    # Use the generator to generate predictions for your test data
+    y_pred = model.predict(val_generator)
+
+    # Get the true labels for your test data
+    y_true = val_generator.get_labels()
+
+    # Calculate the confusion matrix using scikit-learn
+    cm = confusion_matrix(y_true, np.argmax(y_pred, axis=1))
+
+    # Visualize the confusion matrix using matplotlib
+    plt.imshow(cm, cmap=plt.cm.Blues)
+    plt.title('Confusion Matrix for K-Fold Model')
+    plt.colorbar()
+    plt.xlabel('Predicted Labels')
+    plt.ylabel('True Labels')
+    plt.xticks(np.arange(len(val_generator.class_indices)), val_generator.class_indices, rotation=90)
+    plt.yticks(np.arange(len(val_generator.class_indices)), val_generator.class_indices)
+    plt.show()
 
 
 def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labels, train_images, val_images, base_model_cm_dir, model_path, model_version):
@@ -106,6 +132,7 @@ def plot_average_accuracy_k_fold(experiment_ID, model_average_acc_dir, train_acc
     plt.legend(loc='lower right')
     plt.savefig(model_average_acc_dir+"/"+"average-training-validation-accuracy_"+str(experiment_ID)+".svg", bbox_inches='tight', dpi=300)
     plt.show()
+    return mean_train_acc, mean_val_acc
     
 
 
@@ -124,6 +151,7 @@ def plot_loss_k_fold(experiment_ID, model_loss_dir, train_loss_all, val_loss_all
     plt.legend(loc='lower right')
     plt.savefig(model_loss_dir+"/"+"training-validation-loss_"+str(experiment_ID)+".svg", bbox_inches='tight', dpi=300)
     plt.show()
+ 
     
 
 def plot_average_loss_k_fold(experiment_ID, model_average_loss_dir, train_loss_all, val_loss_all, num_folds, num_epochs):
@@ -143,6 +171,7 @@ def plot_average_loss_k_fold(experiment_ID, model_average_loss_dir, train_loss_a
     plt.ylabel('Loss', fontsize=12)
     plt.legend(loc='lower right')
     plt.savefig(model_average_loss_dir+"/"+"average-training-validation-loss_"+str(experiment_ID)+".svg", bbox_inches='tight', dpi=300)
+    return mean_train_loss, mean_val_loss
     plt.show()
 
 

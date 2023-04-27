@@ -19,6 +19,9 @@ from keras.models import load_model
 from nwb_data_generator import NWBDataGenerator
 from model_architecture import construct_model
 
+
+from plots import plot_cm_k_fold
+
 import gc
 
 
@@ -28,7 +31,8 @@ def run_k_fold(params,
                val_loss_all,
                train_acc_all,
                val_acc_all,
-               average_score_list):
+               average_score_list,
+               experiment_ID):
     
     
     images = params['images']
@@ -80,6 +84,7 @@ def run_k_fold(params,
                             validation_data=val_generator)
                             # callbacks=[early_stopping])
         
+        
         # all_histories.append(history)  # save the history object to the list
 
         
@@ -99,7 +104,14 @@ def run_k_fold(params,
         print(f'Validation accuracy: {accuracy_score[1]:.4f}\n')
         # accuracy_score_list.append(accuracy_score)
 
-
+        
+        # print("CM for fold ",  fold)
+        # no_of_behaviors = ['Main Corr', 'Left Corr', 'Right Corr']
+        # model_cm_dir = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V3/output/cm"
+        
+        # plot_cm_k_fold(val_generator, no_of_behaviors, experiment_ID, model_cm_dir, model)
+        
+        
         # performance management, delete variables that are no longer needed
         # del train_images, train_labels, val_images, val_labels, model, history, accuracy_score
         del train_generator, val_generator, model, history, accuracy_score
@@ -109,7 +121,15 @@ def run_k_fold(params,
         
         
     return train_loss_all, val_loss_all, train_acc_all, val_acc_all, average_score_list
+
     print("\nDone!\n")
+    
+
+    # plot_confusion_matrix(experiment_ID, no_of_behaviors, train_generator, val_generator, train_labels, val_labels, train_images, val_images, model_cm_dir, model_path, model_version)
+
+    
+    
+    
     
     
     

@@ -1,7 +1,6 @@
 import numpy as np
 import h5py
 from tensorflow.keras.utils import Sequence
-from pixel_values_normalization import normalize_video
 
 class NWBDataGenerator(Sequence):
 
@@ -12,6 +11,16 @@ class NWBDataGenerator(Sequence):
         self.labels = labels
         self.batch_size = batch_size
         self.frame_order = np.random.permutation(idx)
+        self.min_frame = np.min(self.images, axis = 0)
+        #self.images = self.images - self.min_frame
+        
+        self.max_frame = np.max(self.images, axis = 0)
+        self.max_pixel_value = np.max(self.max_frame - self.min_frame)
+        self.min_pixel_value = 0
+        
+        
+
+        
         
     def __len__(self):
         return len(self.frame_order) // self.batch_size
@@ -21,14 +30,14 @@ class NWBDataGenerator(Sequence):
         indices = self.frame_order[batch_index * N:(batch_index+1)*N]
     
         # find min frame from the batch
-        min_frame = np.min(self.images[indices, :, :], axis=0)
         # remove the background
-        self.images[indices, :, :] = self.images[indices, :, :] - min_frame
+        batch_images = self.images[indices, :, :] - self.min_frame
+        batch_images = (batch_images - self.min_pixel_value) / (self.max_pixel_value - self.min_pixel_value)
         
         # normalize the values in the batch
-        self.images[indices, :, :] = normalize_video(self.images[indices, :, :])
+
         
-        return self.images[indices, :, :], self.labels[indices, :]
+        return batch_images, self.labels[indices, :]
 
 
 
