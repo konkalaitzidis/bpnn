@@ -18,8 +18,10 @@ class NWBDataGenerator(Sequence):
         self.max_pixel_value = np.max(self.max_frame - self.min_frame)
         self.min_pixel_value = 0
         
-        
+    
 
+    def get_labels(self):
+        return self.labels[self.frame_order[:self.batch_size*(len(self.frame_order)//self.batch_size)]]
         
         
     def __len__(self):

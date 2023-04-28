@@ -2,11 +2,14 @@
 # from keras.models import load_model
 # from keras.models import model_from_json
 from keras.models import Sequential
-# from tensorflow.keras.applications.resnet50 import ResNet50
-from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Dropout, Flatten, Dense
+from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
+
+from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Dropout, Flatten, Dense, UpSampling2D
 import tensorflow as tf
 from tensorflow.keras.models import Model
-from tensorflow.keras.applications.inception_v3 import InceptionV3
+# from tensorflow.keras.applications.inception_v3 import InceptionV3
+# from keras.applications.resnet50 import ResNet50
+
 
 
 def construct_model(input_shape, num_classes, name):
@@ -44,9 +47,69 @@ def construct_model(input_shape, num_classes, name):
 #     # Complete model 
     # model.summary()
     
-    
     print("Compiling model...\n")
     model.compile(loss='categorical_crossentropy', optimizer=tf.keras.optimizers.legacy.Adam(), metrics=['accuracy'])
+    
+    
+    
+    # ========
+
+
+    
+    
+#     # Load the ResNet50 model pre-trained on ImageNet dataset
+#     resnet = ResNet50(include_top=False, weights='imagenet', input_shape = (356, 398, 1))
+
+#     # Freeze the weights of the ResNet50 layers to prevent them from being updated during training
+#     for layer in resnet.layers:
+#         layer.trainable = False
+
+#     # Define the input shape of your model
+#     input_shape = input_shape
+
+#     # Define the number of classes in your dataset
+#     num_classes = 3
+
+#     # Create a new input layer with the same shape as your grayscale images
+#     input_layer = Input(shape=input_shape)
+
+#     # Add a 2D upsampling layer to add two additional color channels to your grayscale images
+#     upsample_layer = UpSampling2D(size=(1, 1, 3))(input_layer)
+
+#     # Preprocess the input using the preprocess_input function from the ResNet50 module
+#     preprocessed_input = preprocess_input(upsample_layer)
+
+#     # Load the ResNet50 model pre-trained on ImageNet dataset, with input shape (None, None, 3) to match the output of the UpSampling2D layer
+#     resnet_model = ResNet50(weights='imagenet', include_top=False, input_shape=(None, None, 3))
+
+#     # Freeze the weights of the ResNet50 layers to prevent them from being updated during training
+#     for layer in resnet_model.layers:
+#         layer.trainable = False
+
+#     # Connect the preprocessed input to the ResNet50 model
+#     resnet_output = resnet_model(preprocessed_input)
+
+#     # Flatten the output of the ResNet50 model
+#     flatten_layer = Flatten()(resnet_output)
+
+#     # Add a dense layer with 128 units and ReLU activation function
+#     dense_layer = Dense(128, activation='relu')(flatten_layer)
+
+#     # Add a dropout layer to prevent overfitting
+#     dropout_layer = Dropout(0.5)(dense_layer)
+
+#     # Add the final output layer with num_classes units and softmax activation function
+#     output_layer = Dense(num_classes, activation='softmax')(dropout_layer)
+
+#     # Create a new model that includes the ResNet50 model as a feature extractor
+#     model = Model(inputs=input_layer, outputs=output_layer)
+    
+#     print("Compiling model...\n")
+#     # Compile the model with appropriate optimizer, loss function, and metrics
+#     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+
+
+
     
     
 #     model = InceptionV3(include_top=False, input_shape=input_shape, weights=None)

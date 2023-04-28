@@ -18,6 +18,7 @@ from keras.models import load_model
 # import NWBDataGenerator and use it in your code
 from nwb_data_generator import NWBDataGenerator
 from model_architecture import construct_model
+from sklearn.metrics import confusion_matrix
 
 
 from plots import plot_cm_k_fold
@@ -51,12 +52,13 @@ def run_k_fold(params,
     # Define the KFold cross-validator
     kf = KFold(n_splits=num_folds, shuffle=shuffle)
     
+    conf_matrices = []
     
     for fold, (train_idx, test_idx) in enumerate(kf.split(images), 1):
     
     
         # loop control
-        print(f'Fold {fold}/{num_folds}\n')
+        print(f'\n\n\nFold {fold}/{num_folds}\n')
 
         # if fold == 4:
         #     break
@@ -67,6 +69,7 @@ def run_k_fold(params,
         train_generator = NWBDataGenerator(images, labels, train_idx)
         val_generator = NWBDataGenerator(images, labels, test_idx)
         
+
         # construct model
         print("Creating Model\n")
         model = construct_model(input_shape, num_classes, name)
@@ -85,9 +88,10 @@ def run_k_fold(params,
                             # callbacks=[early_stopping])
         
         
+        
+        
         # all_histories.append(history)  # save the history object to the list
 
-        
         
          # Append the training and validation loss and accuracy values to the corresponding lists
         train_loss_all.append(np.array(history.history['loss']))
@@ -95,34 +99,57 @@ def run_k_fold(params,
         train_acc_all.append(np.array(history.history['accuracy']))
         val_acc_all.append(np.array(history.history['val_accuracy']))
 
+        
         # Evaluate the model on the validation set
-        print("\nEvaluating model.")
-        accuracy_score = model.evaluate_generator(val_generator, verbose=0)
+        print("\nEvaluating model...")
+        accuracy_score = model.evaluate(val_generator, verbose=0)
+        print(f'Validation loss: {accuracy_score[0]:.4f}')
+        print(f'Validation accuracy: {accuracy_score[1]:.4f}\n')
         average_score_list.append(accuracy_score[1])
         
-        # accuracy_score = model.evaluate(val_images, val_labels, verbose=0)
-        print(f'Validation accuracy: {accuracy_score[1]:.4f}\n')
         # accuracy_score_list.append(accuracy_score)
-
         
-        # print("CM for fold ",  fold)
-        # no_of_behaviors = ['Main Corr', 'Left Corr', 'Right Corr']
+        
+        
+        # get the true labels and predicted labels for the validation set
+        print("Generating predictions on validation data")
+        true_labels = val_generator.get_labels()
+        predictions = model.predict(val_generator)
+        
+        y_true = np.array([np.argmax(x) for x in true_labels])
+        y_pred = np.array([np.argmax(x) for x in predictions])
+        
+        # print(np.mean(y_true == y_pred))
+        
+        # calculate the confusion matrix for this fold
+        cm = confusion_matrix(y_true, y_pred)
+        conf_matrices.append(cm)
+        
+        
         # model_cm_dir = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V3/output/cm"
         
         # plot_cm_k_fold(val_generator, no_of_behaviors, experiment_ID, model_cm_dir, model)
         
-        
-        # performance management, delete variables that are no longer needed
         # del train_images, train_labels, val_images, val_labels, model, history, accuracy_score
         del train_generator, val_generator, model, history, accuracy_score
-
-        # Run the garbage collector to free up memory
         gc.collect()
         
-        
-    return train_loss_all, val_loss_all, train_acc_all, val_acc_all, average_score_list
-
+    
     print("\nDone!\n")
+    
+    no_of_behaviors = ['Main Corr', 'Left Corr', 'Right Corr']
+    
+    model_cm_dir = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V3/output/cm"
+    
+    plot_cm_k_fold(conf_matrices, no_of_behaviors, num_classes, experiment_ID, model_cm_dir)
+        
+    return train_loss_all, val_loss_all, train_acc_all, val_acc_all, average_score_list, conf_matrices
+ 
+    
+
+    
+    
+    
     
 
     # plot_confusion_matrix(experiment_ID, no_of_behaviors, train_generator, val_generator, train_labels, val_labels, train_images, val_images, model_cm_dir, model_path, model_version)
