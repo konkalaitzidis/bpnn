@@ -61,6 +61,7 @@ def align_files(bonsai_paths, behavior_paths, num_of_videos):
             2: 'Reward', 3: 'Frame_Number', 4: 'Central_Zone',
             5: 'L_Zone', 6: 'R_Zone', 7: 'Calcium_frame'})
 
+        # print(bonsai_data.head())
         
         # Append the DataFrame to the list of CSV data
         bonsai_data_list.append(bonsai_data)
@@ -71,6 +72,8 @@ def align_files(bonsai_paths, behavior_paths, num_of_videos):
         behavior_data = pd.read_hdf(path2, 'per_frame')
 
         # Append the DataFrame to the list of CSV data
+        # print(behavior_data.head())
+
         behavior_data_list.append(behavior_data)
     
 
@@ -119,6 +122,8 @@ def align_files(bonsai_paths, behavior_paths, num_of_videos):
     df_new_annotations = pd.concat(df_new_annotations_list, axis=0)
     df_new_annotations = df_new_annotations.reset_index()
     df_new_annotations_unique = df_new_annotations['state_id'].unique()
+    
+    
     return df_new_annotations, df_new_annotations_unique
 
                 
