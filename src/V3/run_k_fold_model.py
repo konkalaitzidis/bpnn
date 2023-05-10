@@ -16,7 +16,7 @@ from sklearn.model_selection import KFold
 from keras.models import load_model
 
 # import NWBDataGenerator and use it in your code
-from nwb_data_generator import NWBDataGenerator
+from nwb_data_generator import NWBDataGeneratorTime
 from model_architecture import construct_model
 from sklearn.metrics import confusion_matrix
 
@@ -66,8 +66,8 @@ def run_k_fold(params,
         print("Splitting data with NWBDataGenerator\n")
 
         # Define the data generators for the training and validation sets
-        train_generator = NWBDataGenerator(images, labels, train_idx)
-        val_generator = NWBDataGenerator(images, labels, test_idx)
+        train_generator = NWBDataGeneratorTime(images, labels, train_idx)
+        val_generator = NWBDataGeneratorTime(images, labels, test_idx)
         
 
         # construct model

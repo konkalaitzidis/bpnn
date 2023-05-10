@@ -4,7 +4,7 @@
 from keras.models import Sequential
 from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input
 
-from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Dropout, Flatten, Dense, UpSampling2D
+from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Dropout, Flatten, Dense, UpSampling2D, LSTM, TimeDistributed
 import tensorflow as tf
 from tensorflow.keras.models import Model
 # from tensorflow.keras.applications.inception_v3 import InceptionV3
@@ -49,28 +49,28 @@ def construct_model(input_shape, num_classes, name):
 
 ####### Standard architecture
 
-    # model = Sequential(name=name)
-    # model.add(Conv2D(32, kernel_size=(7, 7), activation='relu', input_shape=input_shape))
-    # model.add(MaxPooling2D(pool_size=(2, 2), strides=2))
-    # model.add(Conv2D(64, kernel_size=(7, 7), activation='relu'))
-    # model.add(MaxPooling2D(pool_size=(2, 2), strides=2))
-    # model.add(Flatten())
-    # model.add(Dropout(0.5))
-    # model.add(Dense(128, activation='relu'))
-    # model.add(Dense(num_classes, activation='softmax'))
+    model = Sequential(name=name)
+    model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
+    model.add(MaxPooling2D(pool_size=(2, 2), strides=2))
+    model.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
+    model.add(MaxPooling2D(pool_size=(2, 2), strides=2))
+    model.add(Flatten())
+    model.add(Dropout(0.5))
+    model.add(Dense(128, activation='relu'))
+    model.add(Dense(num_classes, activation='softmax'))
     
 
 ####### Standard architecture with LSTM
 
-model = Sequential(name=name)
-model.add(TimeDistributed(Conv2D(32, kernel_size=(7, 7), activation='relu'), input_shape=input_shape))
-model.add(TimeDistributed(MaxPooling2D(pool_size=(2, 2), strides=2)))
-model.add(TimeDistributed(Conv2D(64, kernel_size=(7, 7), activation='relu')))
-model.add(TimeDistributed(MaxPooling2D(pool_size=(2, 2), strides=2)))
-model.add(TimeDistributed(Flatten()))
-model.add(LSTM(128, activation='relu', return_sequences=True))
-model.add(Dropout(0.5))
-model.add(TimeDistributed(Dense(num_classes, activation='softmax')))
+    # model = Sequential(name=name)
+    # model.add(TimeDistributed(Conv2D(32, kernel_size=(7, 7), activation='relu'), input_shape=input_shape))
+    # model.add(TimeDistributed(MaxPooling2D(pool_size=(2, 2), strides=2)))
+    # model.add(TimeDistributed(Conv2D(64, kernel_size=(7, 7), activation='relu')))
+    # model.add(TimeDistributed(MaxPooling2D(pool_size=(2, 2), strides=2)))
+    # model.add(TimeDistributed(Flatten()))
+    # model.add(LSTM(128, activation='relu', return_sequences=True))
+    # model.add(Dropout(0.5))
+    # model.add(TimeDistributed(Dense(num_classes, activation='softmax')))
 
     
 #######
