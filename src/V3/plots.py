@@ -216,14 +216,26 @@ def plot_first_frames(images, labels, vmin, vmax, data_file):
         axes[i].imshow(images[index], vmin = vmin, vmax = vmax)
         label_name = labels[indices[i]]
 
+        # if label_name == 0:
+        #     label_name = "Main Corr"
+        # elif label_name == 1:
+        #     label_name = "Left Corr"
+        # else:
+        #     label_name = "Right Corr"
+
         if label_name == 0:
-            label_name = "Main Corr"
+            label_name = "Grooming"
         elif label_name == 1:
-            label_name = "Left Corr"
+            label_name = "Immobile"
+        elif label_name == 2:
+            label_name = "Still"
+        elif label_name == 3:
+            label_name = "Moving"
+        elif label_name == 4:
+            label_name = "Right Turn"            
         else:
-            label_name = "Right Corr"
-
-
+            label_name = "Left Turn"
+            
         # Convert binary labels to the desired format
         if isinstance(labels[indices[i]], np.ndarray):
             label_name = np.argmax(labels[indices[i]])
@@ -253,12 +265,25 @@ def plot_random_frames(images, labels, vmin, vmax, data_file):
         axes[i].imshow(images[index], vmin = vmin, vmax = vmax)
         label_name = labels[indices[i]]
         
+        # if label_name == 0:
+        #     label_name = "Main Corr"
+        # elif label_name == 1:
+        #     label_name = "Left Corr"
+        # else:
+        #     label_name = "Right Corr"
+        
         if label_name == 0:
-            label_name = "Main Corr"
+            label_name = "Grooming"
         elif label_name == 1:
-            label_name = "Left Corr"
+            label_name = "Immobile"
+        elif label_name == 2:
+            label_name = "Still"
+        elif label_name == 3:
+            label_name = "Moving"
+        elif label_name == 4:
+            label_name = "Right Turn"            
         else:
-            label_name = "Right Corr"
+            label_name = "Left Turn"
 
         # Convert binary labels to the desired format
         if isinstance(labels[indices[i]], np.ndarray):
