@@ -5,7 +5,7 @@ import h5py
 
 
 #====== old labels ======#
-def align_files_old_labels(bonsai_paths, behavior_paths, num_of_videos):
+def align_files_old_labels(bonsai_paths, behavior_paths, num_of_videos, merge_labels):
 
     bonsai_data_list = []
     behavior_data_list = []
@@ -123,7 +123,6 @@ def align_files_old_labels(bonsai_paths, behavior_paths, num_of_videos):
 #         df_new_annotations = df_new_annotations.loc[:, 'state_id']
 #         df_new_annotations_list.append(df_new_annotations)
 
-
     
     for i, (path1, path2) in enumerate(zip(bonsai_data_list, behavior_data_list)):
             df_aligned = path2.loc[path1.groupby('Calcium_frame').first()[1:].Frame_Number].reset_index()
@@ -131,34 +130,40 @@ def align_files_old_labels(bonsai_paths, behavior_paths, num_of_videos):
             df_new_annotations = df_aligned[['state_id', 'state_name']]
             df_unique_states = df_new_annotations[['state_id', 'state_name']].drop_duplicates(subset='state_id').set_index('state_id')['state_name'].sort_index()
             
+            
+            
+            
             # state id mapping for main corridor, left corridor, right corridor for animal3learnday8
             # print(path2)
             # break
-            
-#             if i == 0:
-#                 state_id_map = {
-#                     1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0,
-#                     9: 1, 11: 1, 13: 1, 14: 1, 15: 1, 16: 1, 17: 1, 18: 1,
-#                     10: 2, 12: 2, 19: 2, 20: 2, 21: 2, 22: 2, 23: 2
-#                 }
+            if merge_labels == True:
+                if i == 0:
+                    state_id_map = {
+                        1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0,
+                        9: 1, 11: 1, 13: 1, 14: 1, 15: 1, 16: 1, 17: 1, 18: 1,
+                        10: 2, 12: 2, 19: 2, 20: 2, 21: 2, 22: 2, 23: 2, 24: 2, 25:2
+                    }
+
+                elif i == 1:
+                    state_id_map = {
+                        1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0,
+                        9: 1, 11: 1, 13: 1, 14: 1, 15: 1, 16: 1, 17: 1, 18: 1,
+                        10: 2, 12: 2, 19: 2, 20: 2, 21: 2, 22: 2, 23: 2, 24: 2, 25:2
+                    }
+
+                else:
+                    state_id_map = {
+                        1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0,
+                        9: 1, 11: 1, 13: 1, 14: 1, 15: 1, 16: 1, 17: 1, 18: 1,
+                        10: 2, 12: 2, 19: 2, 20: 2, 21: 2, 22: 2, 23: 2, 24: 2, 25:2
+                    }
                 
-#             elif i == 1:
-#                 state_id_map = {
-#                     1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0,
-#                     9: 1, 11: 1, 13: 1, 14: 1, 15: 1, 16: 1, 17: 1, 18: 1,
-#                     10: 2, 12: 2, 19: 2, 20: 2, 21: 2, 22: 2, 23: 2, 24: 2
-#                 }
-                
-#             else:
-#                 state_id_map = {
-#                     1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0,
-#                     9: 1, 11: 1, 13: 1, 14: 1, 15: 1, 16: 1, 17: 1, 18: 1,
-#                     10: 2, 12: 2, 19: 2, 20: 2, 21: 2, 22: 2, 23: 2, 24: 2, 25: 2
-#                 }
-                
-            # df_new_annotations.loc[:, 'state_id'] = df_new_annotations.loc[:, 'state_id'].replace(state_id_map)
-            df_new_annotations = df_new_annotations.loc[:, 'state_id']
-            df_new_annotations_check = df_aligned[['state_id', 'state_name']]
+                df_new_annotations.loc[:, 'state_id'] = df_new_annotations.loc[:, 'state_id'].replace(state_id_map)
+                names_of_labels = 'Main Corr', 'Left Corr', 'Right Corr'
+        
+        
+            # df_new_annotations = df_new_annotations.loc[:, 'state_id']
+            df_new_annotations_check = df_new_annotations[['state_id', 'state_name']]
             df_new_annotations_list.append(df_new_annotations)
             
     

@@ -91,8 +91,10 @@ def run_k_fold(params,
             train_class_counts = train_labels_fold.value_counts()
             test_class_counts = test_labels_fold.value_counts()
 
+            no_of_labels = len(train_labels_names)
             
-            fig = check_class_imbalance_k_fold(train_class_counts, test_class_counts, fold, num_folds, experiment_ID, save_dir, df_new_annotations_unique, df_new_annotations_check, train_labels_names)
+            
+            fig = check_class_imbalance_k_fold(train_class_counts, test_class_counts, fold, num_folds, experiment_ID, save_dir, df_new_annotations_unique, df_new_annotations_check, train_labels_names, no_of_labels)
             
 
             # Save the plot in the pdf
