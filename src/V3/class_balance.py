@@ -5,6 +5,26 @@ import pandas as pd
 import seaborn as sns
 
 
+
+
+def check_class_imbalance_k_fold(train_class_counts, test_class_counts, fold, num_folds, experiment_ID, save_dir, df_new_annotations_unique, df_new_annotations_check, train_labels_names):
+    
+
+    fig = plt.figure(figsize=(8, 6))
+    plt.bar(train_class_counts.index, train_class_counts.values, color='b', alpha=0.5, label='Train')
+    plt.bar(test_class_counts.index, test_class_counts.values, color='r', alpha=0.5, label='Test')
+    plt.xlabel('Class Label')
+    plt.ylabel('Number of Instances')
+    plt.title(f'Distribution of Class Labels in Fold {fold}/{num_folds}')
+    plt.xticks(np.arange(len(train_labels_names)), train_labels_names, rotation=90, fontsize=8)
+    # plt.xticks(np.arange(len(train_class_counts.index)), train_class_counts.index)
+    plt.legend()
+    
+    return fig
+    
+
+
+
 def check_class_imbalance_old(df_new_annotations, experiment_ID, save_dir, df_new_annotations_unique, df_new_annotations_check):
     total_counts = 0
     for i in range(len(df_new_annotations_unique)):
