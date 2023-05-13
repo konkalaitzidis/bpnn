@@ -81,8 +81,8 @@ def check_class_imbalance_old(df_new_annotations, experiment_ID, save_dir, df_ne
     # calculate the percentage of each class in the dataset
     class_percents = pd.value_counts(df_new_annotations, normalize=True) * 100
 
-    
-    
+    # sns.color_palette("rocket")
+
      # create a bar chart of class percentages using Seaborn
     sns.set_style("whitegrid")
     plt.figure(figsize=(8, 6))
