@@ -6,7 +6,7 @@ from keras.models import load_model
 # for generating a confusion matrix
 from sklearn.metrics import confusion_matrix, f1_score
 from matplotlib.gridspec import GridSpec
-from save_model_info import save_training_info
+# from save_model_info import save_training_info
 from skimage.transform import resize
 from sklearn.metrics import confusion_matrix
 from matplotlib.backends.backend_pdf import PdfPages
