@@ -9,24 +9,46 @@ from matplotlib.gridspec import GridSpec
 from save_model_info import save_training_info
 from skimage.transform import resize
 from sklearn.metrics import confusion_matrix
+from matplotlib.backends.backend_pdf import PdfPages
 
 
-def plot_cm_k_fold(conf_matrices, no_of_behaviors, num_classes, experiment_ID, model_cm_dir):
-    
+#=============================================#
+
+
+# def plot_cm_k_fold(conf_matrices, no_of_behaviors, num_classes, experiment_ID, model_cm_dir):
+
+def plot_cm_k_fold(model_cm_dir, fold, cm, conf_matrices, train_labels_names):
+
     print("Plotting confusion matrix\n")
+    
+    with PdfPages(model_cm_dir+'/Confusion_Matrices_Per_Fold.pdf') as pdf:
+        # plot the confusion matrix for each fold
+        for fold, cm in enumerate(conf_matrices):
+            print(f"Plotting the confusion matrix for fold {fold}")
+            f = plt.figure(figsize=(8, 6))
+            sns.heatmap(cm, annot=True, cmap='Blues', fmt='g')
+            plt.title(f'Confusion Matrix - Fold {fold}')
+            plt.xlabel('Predicted Labels')
+            plt.xticks(np.arange(len(train_labels_names)), train_labels_names, rotation=90, fontsize=6)
+            plt.ylabel('True Labels')
+            plt.yticks(np.arange(len(train_labels_names)), train_labels_names, rotation=0, fontsize=6)
+            # Save the plot in the pdf
+            pdf.savefig(f, bbox_inches='tight')
+            plt.show()
+    
 
-    no_of_behaviors = no_of_behaviors
-    n_classes = num_classes   
-    mean_conf_matrix = np.mean(conf_matrices, axis=0)
-    plt.figure(figsize=(8, 6))
-    sns.heatmap(mean_conf_matrix, annot=True, cmap='Blues', fmt='g', xticklabels=no_of_behaviors, yticklabels=no_of_behaviors)
-    plt.title('Confusion Matrix - K-fold, Location Labels')
-    plt.xlabel('Predicted Labels')
-    plt.ylabel('True Labels')
-    plt.savefig(model_cm_dir+"/"+'cm_val_'+str(experiment_ID)+'.svg', bbox_inches='tight', dpi=300)
-    plt.show()
-        
+    # no_of_behaviors = no_of_behaviors
+    # n_classes = num_classes   
+    # mean_conf_matrix = np.mean(conf_matrices, axis=0)
+    # plt.figure(figsize=(8, 6))
+    # sns.heatmap(mean_conf_matrix, annot=True, cmap='Blues', fmt='g', xticklabels=no_of_behaviors, yticklabels=no_of_behaviors)
+    # plt.title('Confusion Matrix - K-fold, Location Labels')
+    # plt.xlabel('Predicted Labels')
+    # plt.ylabel('True Labels')
+    # plt.savefig(model_cm_dir+"/"+'cm_val_'+str(experiment_ID)+'.svg', bbox_inches='tight', dpi=300)
+    # plt.show()
 
+#=============================================#
 
 def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labels, train_images, val_images, base_model_cm_dir, model_path, model_version):
     
@@ -58,7 +80,7 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
     plt.title('Confusion Matrix - Training, Location Labels')
     plt.xlabel('Predicted Labels')
     plt.ylabel('True Labels')
-    plt.savefig(base_model_cm_dir+"/"+'cm_train_'+str(experiment_ID)+'.png', bbox_inches='tight', dpi=300)
+    plt.savefig(base_model_cm_dir+"/"+'cm_train_'+str(experiment_ID)+'.svg', bbox_inches='tight', dpi=300)
     plt.show()
     
     # Repeat for validation data
@@ -70,7 +92,7 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
     plt.title('Confusion Matrix - Validation, Location Labels')
     plt.xlabel('Predicted Labels')
     plt.ylabel('True Labels')
-    plt.savefig(base_model_cm_dir+"/"+'cm_val_'+str(experiment_ID)+'.png', bbox_inches='tight', dpi=300)
+    plt.savefig(base_model_cm_dir+"/"+'cm_val_'+str(experiment_ID)+'.svg', bbox_inches='tight', dpi=300)
     plt.show()
     f1_score_val = f1_score(val_labels, val_predicted_labels, average='micro')
     print("F1 score is: {:.3f}" .format(f1_score_val))
@@ -78,7 +100,7 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
     # from save_model_info import save_training_info
     # return f1_score
 
-    
+
 # def plot_accuracy(x, history):
 #     dir_path = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/accuracy"
 
@@ -91,6 +113,9 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
 #     plt.savefig(dir_path+"/"+'model_accuracy_'+str(x)+'.png', bbox_inches='tight', dpi=300)
 #     return plt.show()
 
+#=============================================#
+
+
 def plot_accuracy_k_fold(experiment_ID, model_acc_dir, train_acc_all, val_acc_all, num_folds, num_epochs):
     fig = plt.figure(figsize=(8, 6)) 
     sns.set_style('whitegrid')
@@ -98,13 +123,15 @@ def plot_accuracy_k_fold(experiment_ID, model_acc_dir, train_acc_all, val_acc_al
     for i in range(num_folds):
         sns.lineplot(x=range(num_epochs), y=train_acc_all[i], label=f'Train Acc Fold {i+1}')
         sns.lineplot(x=range(num_epochs), y=val_acc_all[i], label=f'Val Acc Fold {i+1}')
-    plt.title('Training and Validation Accuracy', fontsize=14)
+    plt.title('Training and Validation Accuracy Per Fold', fontsize=14)
     plt.xlabel('Epoch', fontsize=12)
     plt.ylabel('Accuracy', fontsize=12)
     # ax.set(title='Training and Validation Accuracy', xlabel='Epoch', ylabel='Accuracy')
     plt.legend(loc='lower right')
     plt.savefig(model_acc_dir+"/"+"training-validation-accuracy_"+str(experiment_ID)+".svg", bbox_inches='tight', dpi=300)
     plt.show()
+    
+#=============================================#
     
 def plot_average_accuracy_k_fold(experiment_ID, model_average_acc_dir, train_acc_all, val_acc_all, num_folds, num_epochs):
     fig = plt.figure(figsize=(8, 6)) 
@@ -125,7 +152,7 @@ def plot_average_accuracy_k_fold(experiment_ID, model_average_acc_dir, train_acc
     plt.show()
     return mean_train_acc, mean_val_acc
     
-
+#=============================================#
 
 def plot_loss_k_fold(experiment_ID, model_loss_dir, train_loss_all, val_loss_all, num_folds, num_epochs):
 
@@ -135,15 +162,16 @@ def plot_loss_k_fold(experiment_ID, model_loss_dir, train_loss_all, val_loss_all
     for i in range(num_folds):
         sns.lineplot(x=range(num_epochs), y=train_loss_all[i], label=f'Train Loss Fold {i+1}')
         sns.lineplot(x=range(num_epochs), y=val_loss_all[i], label=f'Val Loss Fold {i+1}')
-    plt.title('Training and Validation Loss', fontsize=14)
+    plt.title('Training and Validation Loss Per Fold', fontsize=14)
     plt.xlabel('Epoch', fontsize=12)
     plt.ylabel('Loss', fontsize=12)
     # ax.set(title='Training and Validation Accuracy', xlabel='Epoch', ylabel='Accuracy')
     plt.legend(loc='lower right')
     plt.savefig(model_loss_dir+"/"+"training-validation-loss_"+str(experiment_ID)+".svg", bbox_inches='tight', dpi=300)
     plt.show()
- 
     
+
+#=============================================#
 
 def plot_average_loss_k_fold(experiment_ID, model_average_loss_dir, train_loss_all, val_loss_all, num_folds, num_epochs):
 
@@ -165,7 +193,7 @@ def plot_average_loss_k_fold(experiment_ID, model_average_loss_dir, train_loss_a
     return mean_train_loss, mean_val_loss
     plt.show()
 
-
+#=============================================#
 
 
 
