@@ -115,21 +115,158 @@ def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labe
 
 #=============================================#
 
+# def plot_accuracy_k_fold(experiment_ID, model_acc_dir, train_acc_all, val_acc_all, num_folds, num_epochs):
+#     fig, axs = plt.subplots(nrows=num_folds, figsize=(8, 6*num_folds)) 
+#     sns.set_style('whitegrid')
+#     sns.set_palette('husl')
+        
+#     for i in range(num_folds):
+#         axs[i].plot(range(len(train_acc_all[i])), train_acc_all[i], label=f'Train Acc')
+#         axs[i].plot(range(len(val_acc_all[i])), val_acc_all[i], label=f'Val Acc')
+#         axs[i].set_title(f'Fold {i+1}', fontsize=14)
+#         axs[i].set_xlabel('Epoch', fontsize=12)
+#         axs[i].set_ylabel('Accuracy', fontsize=12)
+#         axs[i].legend(loc='lower right')
+    
+#     plt.suptitle('Training and Validation Accuracy Per Fold', fontsize=16)
+#     plt.savefig(model_acc_dir+"/"+"training-validation-accuracy_"+str(experiment_ID)+".svg", bbox_inches='tight', dpi=300)
+#     plt.show()
 
-def plot_accuracy_k_fold(experiment_ID, model_acc_dir, train_acc_all, val_acc_all, num_folds, num_epochs):
-    fig = plt.figure(figsize=(8, 6)) 
+
+def plot_accuracy_k_fold(experiment_ID, model_acc_dir, train_acc_all, val_acc_all, num_folds, num_epochs, min_length):
+    fig = plt.figure(figsize=(4, 3)) 
     sns.set_style('whitegrid')
     sns.set_palette('husl')
+    
+#     # Find the minimum length of the train and validation accuracy lists
+#     min_length = min([len(train_acc_all[i]) for i in range(num_folds)] + [len(val_acc_all[i]) for i in range(num_folds)])
+    
+    # Create arrays to hold the averaged results
+    train_acc_avg = np.zeros(min_length)
+    val_acc_avg = np.zeros(min_length)
+    
+    
+    # Average the results across all folds
     for i in range(num_folds):
-        sns.lineplot(x=range(num_epochs), y=train_acc_all[i], label=f'Train Acc Fold {i+1}')
-        sns.lineplot(x=range(num_epochs), y=val_acc_all[i], label=f'Val Acc Fold {i+1}')
-    plt.title('Training and Validation Accuracy Per Fold', fontsize=14)
-    plt.xlabel('Epoch', fontsize=12)
-    plt.ylabel('Accuracy', fontsize=12)
-    # ax.set(title='Training and Validation Accuracy', xlabel='Epoch', ylabel='Accuracy')
+        train_acc_fold = np.array(train_acc_all[i][:min_length])
+        val_acc_fold = np.array(val_acc_all[i][:min_length])
+        train_acc_avg += train_acc_fold
+        val_acc_avg += val_acc_fold
+        
+        # # Plot individual fold results
+        # sns.lineplot(x=range(min_length), y=train_acc_fold, label=f'Train Acc Fold {i+1}', alpha=0.7)
+        # sns.lineplot(x=range(min_length), y=val_acc_fold, label=f'Val Acc Fold {i+1}', alpha=0.7)
+        
+    train_acc_avg /= num_folds
+    val_acc_avg /= num_folds
+    
+    # Plot the averaged results
+    sns.lineplot(x=range(min_length), y=train_acc_avg, label='Train Acc', linewidth=2.5, color='#880454')
+    sns.lineplot(x=range(min_length), y=val_acc_avg, label='Val Acc', linewidth=2.5, color='#2596be')
+    
+    plt.title('Training and Validation Accuracy (5-Fold CV)', fontsize=8)
+    plt.xlabel('Epoch', fontsize=6)
+    plt.ylabel('Accuracy', fontsize=6)
     plt.legend(loc='lower right')
     plt.savefig(model_acc_dir+"/"+"training-validation-accuracy_"+str(experiment_ID)+".svg", bbox_inches='tight', dpi=300)
     plt.show()
+    
+    return train_acc_avg, val_acc_avg
+    
+    
+#=============================================#
+
+def plot_loss_k_fold(experiment_ID, model_loss_dir, train_loss_all, val_loss_all, num_folds, num_epochs, min_length):
+
+    fig, ax = plt.subplots(figsize=(4, 3))
+    sns.set_style('whitegrid')
+    sns.set_palette('husl')
+    
+    
+    # Create arrays to hold the averaged results
+    train_loss_avg = np.zeros(min_length)
+    val_loss_avg = np.zeros(min_length)
+    
+    # Average the results across all folds
+    for i in range(num_folds):
+        train_loss_fold = np.array(train_loss_all[i][:min_length])
+        val_loss_fold = np.array(val_loss_all[i][:min_length])
+        train_loss_avg += train_loss_fold
+        val_loss_avg += val_loss_fold
+        
+        # # Plot individual fold results
+        # sns.lineplot(x=range(min_length), y=train_loss_fold, label=f'Train Loss Fold {i+1}', alpha=0.7)
+        # sns.lineplot(x=range(min_length), y=val_loss_fold, label=f'Val Loss Fold {i+1}', alpha=0.7)
+    
+    train_loss_avg /= num_folds
+    val_loss_avg /= num_folds
+    
+    # Plot the averaged results
+    sns.lineplot(x=range(min_length), y=train_loss_avg, label='Train Loss', linewidth=2.5, color='#880454')
+    sns.lineplot(x=range(min_length), y=val_loss_avg, label='Val Loss', linewidth=2.5, color='#2596be')
+    
+    
+    plt.title('Training and Validation Loss (5-Fold CV)', fontsize=8)
+    plt.xlabel('Epoch', fontsize=6)
+    plt.ylabel('Loss', fontsize=6)
+    plt.legend(loc='lower right')
+    plt.savefig(model_loss_dir+"/"+"training-validation-loss_"+str(experiment_ID)+".svg", bbox_inches='tight', dpi=300)
+    plt.show()
+
+    return train_loss_avg, val_loss_avg
+    
+    # for i in range(num_folds):
+    #     sns.lineplot(x=range(num_epochs), y=train_loss_all[i], label=f'Train Loss Fold {i+1}')
+    #     sns.lineplot(x=range(num_epochs), y=val_loss_all[i], label=f'Val Loss Fold {i+1}')
+    # plt.title('Training and Validation Loss Per Fold', fontsize=14)
+    # plt.xlabel('Epoch', fontsize=12)
+    # plt.ylabel('Loss', fontsize=12)
+    # # ax.set(title='Training and Validation Accuracy', xlabel='Epoch', ylabel='Accuracy')
+    # plt.legend(loc='lower right')
+    # plt.savefig(model_loss_dir+"/"+"training-validation-loss_"+str(experiment_ID)+".svg", bbox_inches='tight', dpi=300)
+    # plt.show()
+    
+    
+    
+# def plot_accuracy_k_fold(experiment_ID, model_acc_dir, train_acc_all, val_acc_all, num_folds, num_epochs):
+#     fig = plt.figure(figsize=(12, 6))
+#     sns.set_style('whitegrid')
+#     sns.set_palette('husl')
+    
+#     # Find the minimum length of the train and validation accuracy lists
+#     min_length = min([len(train_acc_all[i]) for i in range(num_folds)] + [len(val_acc_all[i]) for i in range(num_folds)])
+    
+#     # Create arrays to hold the averaged results
+#     train_acc_avg = np.zeros(min_length)
+#     val_acc_avg = np.zeros(min_length)
+    
+#     # Average the results across all folds
+#     for i in range(num_folds):
+#         train_acc_fold = np.array(train_acc_all[i][:min_length])
+#         val_acc_fold = np.array(val_acc_all[i][:min_length])
+#         train_acc_avg += train_acc_fold
+#         val_acc_avg += val_acc_fold
+        
+#         # Plot individual fold results
+#         sns.lineplot(x=range(min_length), y=train_acc_fold, label=f'Train Acc Fold {i+1}', alpha=0.7)
+#         sns.lineplot(x=range(min_length), y=val_acc_fold, label=f'Val Acc Fold {i+1}', alpha=0.7)
+    
+#     train_acc_avg /= num_folds
+#     val_acc_avg /= num_folds
+    
+#     # Plot the averaged results
+#     sns.lineplot(x=range(min_length), y=train_acc_avg, label='Train Acc', linewidth=2.5)
+#     sns.lineplot(x=range(min_length), y=val_acc_avg, label='Val Acc', linewidth=2.5)
+    
+#     plt.title('Training and Validation Accuracy', fontsize=14)
+#     plt.xlabel('Epoch', fontsize=12)
+#     plt.ylabel('Accuracy', fontsize=12)
+#     plt.legend(loc='lower right')
+#     plt.savefig(model_acc_dir+"/"+"training-validation-accuracy_"+str(experiment_ID)+".svg", bbox_inches='tight', dpi=300)
+#     plt.show()
+
+    
+    
     
 #=============================================#
     
@@ -152,23 +289,7 @@ def plot_average_accuracy_k_fold(experiment_ID, model_average_acc_dir, train_acc
     plt.show()
     return mean_train_acc, mean_val_acc
     
-#=============================================#
 
-def plot_loss_k_fold(experiment_ID, model_loss_dir, train_loss_all, val_loss_all, num_folds, num_epochs):
-
-    fig, ax = plt.subplots(figsize=(8, 6))
-    sns.set_style('whitegrid')
-    sns.set_palette('husl')
-    for i in range(num_folds):
-        sns.lineplot(x=range(num_epochs), y=train_loss_all[i], label=f'Train Loss Fold {i+1}')
-        sns.lineplot(x=range(num_epochs), y=val_loss_all[i], label=f'Val Loss Fold {i+1}')
-    plt.title('Training and Validation Loss Per Fold', fontsize=14)
-    plt.xlabel('Epoch', fontsize=12)
-    plt.ylabel('Loss', fontsize=12)
-    # ax.set(title='Training and Validation Accuracy', xlabel='Epoch', ylabel='Accuracy')
-    plt.legend(loc='lower right')
-    plt.savefig(model_loss_dir+"/"+"training-validation-loss_"+str(experiment_ID)+".svg", bbox_inches='tight', dpi=300)
-    plt.show()
     
 
 #=============================================#
