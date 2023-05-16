@@ -20,14 +20,14 @@ def save_training_info(experiment_ID,
     
     # Handle None values for other arguments
     # video_name = video_name if video_name else "No Video Name"
-    comment = comment if comment else "No Comment"
-    experiment_ID = experiment_ID if experiment_ID else "No Experiment ID"
-    save_dir = save_dir if save_dir else "No Save Directory"
+    # comment = comment if comment else "No Comment"
+    # experiment_ID = experiment_ID if experiment_ID else "No Experiment ID"
+    # save_dir = save_dir if save_dir else "No Save Directory"
     
     
     # dir_name = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output"
     # Save the history object to a CSV file
-    with open(os.path.join(save_dir, str(experiment_ID)+'_history.csv'), 'a', newline='') as f:
+    with open(os.path.join(save_dir, 'history.csv'), 'a', newline='') as f:
         writer = csv.writer(f)
 
         # Write header row if file is empty
@@ -37,8 +37,8 @@ def save_training_info(experiment_ID,
         # Write data for each epoch
         # for i, (tl, ta, vl, va) in enumerate(zip(history.history['loss'], history.history['accuracy'], history.history['val_loss'], history.history['val_accuracy'])):
         
-            writer.writerow([experiment_ID, data_file, no_of_labels, f1_score_mean])
-        writer.writerow(['', '', '', ''])
+        writer.writerow([experiment_ID, data_file, no_of_labels, f1_score_mean])
+        # writer.writerow(['', '', '', ''])
         
         print("Training info saved in csv file.")
         

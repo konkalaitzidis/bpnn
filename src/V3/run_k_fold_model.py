@@ -373,22 +373,25 @@ def run_k_fold_basic(params,
     
     plot_cm_k_fold(model_cm_dir, fold, cm, conf_matrices, train_labels_names)
     
-            
-    # plot the mean confusion matrix
-    # mean_cm = np.mean(conf_matrices, axis=0)
-    # plt.figure(figsize=(8, 6))
-    # sns.heatmap(mean_cm, annot=True, cmap='Blues', fmt='g')
-    # plt.title('Mean Confusion Matrix - K-Fold Cross Validation')
-    # plt.xlabel('Predicted Labels')
-    # plt.xticks(np.arange(len(train_labels_names)), train_labels_names, rotation=90, fontsize=6)
-    # plt.ylabel('True Labels')
-    # plt.yticks(np.arange(len(train_labels_names)), train_labels_names, rotation=0, fontsize=6)
-    # plt.show()
+    
+    #plot the mean confusion matrix
+    mean_cm = np.mean(conf_matrices, axis=0)
+    train_labels_names = ['moving', 'rightTurn', 'immobile', 'grooming', 'still', 'leftTurn']
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(mean_cm, annot=True, cmap='Blues', fmt='g')
+    plt.title('Mean Confusion Matrix - K-Fold Cross Validation')
+    plt.xlabel('Predicted Labels')
+    plt.xticks(np.arange(len(train_labels_names)), train_labels_names, rotation=90, fontsize=6)
+    plt.ylabel('True Labels')
+    plt.yticks(np.arange(len(train_labels_names)), train_labels_names, rotation=0, fontsize=6)
+    plt.savefig("mean_CM"+str(experiment_ID)+'.svg', bbox_inches='tight', dpi=300)
+    plt.show()
+    
     
     
     # dir_name = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V3/output/pickles"
   
-    return train_loss_all, val_loss_all, train_acc_all, val_acc_all, average_score_list, conf_matrices, f1_score_val_list
+    return train_loss_all, val_loss_all, train_acc_all, val_acc_all, average_score_list, conf_matrices, f1_score_val_list, train_labels_names
 
 
     

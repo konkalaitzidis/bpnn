@@ -29,9 +29,9 @@ def plot_cm_k_fold(model_cm_dir, fold, cm, conf_matrices, train_labels_names):
             sns.heatmap(cm, annot=True, cmap='Blues', fmt='g')
             plt.title(f'Confusion Matrix - Fold {fold}')
             plt.xlabel('Predicted Labels')
-            plt.xticks(np.arange(len(train_labels_names)), train_labels_names, rotation=90, fontsize=6)
+            plt.xticks(np.arange(len(train_labels_names)) + 0.5, train_labels_names, rotation=90, fontsize=6)
             plt.ylabel('True Labels')
-            plt.yticks(np.arange(len(train_labels_names)), train_labels_names, rotation=0, fontsize=6)
+            plt.yticks(np.arange(len(train_labels_names)) + 0.5, train_labels_names, rotation=0, fontsize=6)
             # Save the plot in the pdf
             pdf.savefig(f, bbox_inches='tight')
             plt.show()
