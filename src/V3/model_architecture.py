@@ -48,6 +48,7 @@ def construct_model(input_shape, num_classes, name):
 
 
 ####### Standard architecture
+    print("Compiling model...\n")
 
     model = Sequential(name=name)
     model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', input_shape=input_shape))
@@ -130,9 +131,9 @@ def construct_model(input_shape, num_classes, name):
 #     model.add(Dropout(0.5))
 #     model.add(Dense(num_classes, activation='softmax'))
     
-    print("Compiling model...\n")
     model.compile(loss='categorical_crossentropy', optimizer=tf.keras.optimizers.legacy.Adam(), metrics=['accuracy'])
-    
+    print("Done :) \n")
+
     
     
     # ========

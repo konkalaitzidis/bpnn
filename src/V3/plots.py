@@ -362,7 +362,7 @@ def plot_first_frames(images, labels, vmin, vmax, data_file):
     # Loop over the indices and plot each frame with its corresponding label
     for i, index in enumerate(indices):
 
-        axes[i].imshow(images[index], vmin = vmin, vmax = vmax)
+        axes[i].imshow(images[index], vmin = vmin, vmax = vmax) #,  interpolation = 'none'
         label_name = labels[indices[i]]
 
         # if label_name == 0:
@@ -375,9 +375,9 @@ def plot_first_frames(images, labels, vmin, vmax, data_file):
         if label_name == 0:
             label_name = "Grooming"
         elif label_name == 1:
-            label_name = "Immobile"
+            label_name = "Frozen"
         elif label_name == 2:
-            label_name = "Still"
+            label_name = "Not Moving"
         elif label_name == 3:
             label_name = "Moving"
         elif label_name == 4:
@@ -389,16 +389,16 @@ def plot_first_frames(images, labels, vmin, vmax, data_file):
         if isinstance(labels[indices[i]], np.ndarray):
             label_name = np.argmax(labels[indices[i]])
         axes[i].set_title("Label: " + str(label_name), fontsize=12)
-        axes[i].tick_params(axis='both', which='both', length=0)
-        axes[i].set_xticklabels([])
-        axes[i].set_yticklabels([])
-
-
-
-    plt.subplots_adjust(wspace=0.05, hspace=0)
+        # axes[i].tick_params(axis='both', which='both', length=0)
+        # axes[i].set_xticklabels([])
+        # axes[i].set_yticklabels([])
+        # plt.subplots_adjust(wspace=0.05, hspace=0)
+    plt.tight_layout()
     plt.show()
 
 
+
+    
     
 def plot_random_frames(images, labels, vmin, vmax, data_file):
 
@@ -424,9 +424,9 @@ def plot_random_frames(images, labels, vmin, vmax, data_file):
         if label_name == 0:
             label_name = "Grooming"
         elif label_name == 1:
-            label_name = "Immobile"
+            label_name = "Frozen"
         elif label_name == 2:
-            label_name = "Still"
+            label_name = "Not Moving"
         elif label_name == 3:
             label_name = "Moving"
         elif label_name == 4:
@@ -442,7 +442,7 @@ def plot_random_frames(images, labels, vmin, vmax, data_file):
         axes[i].set_xticklabels([])
         axes[i].set_yticklabels([])
 
-    plt.subplots_adjust(wspace=0.05, hspace=0)
+    # plt.subplots_adjust(wspace=0.05, hspace=0)
     plt.show()
     # plt.savefig('five_random_frames.png')
 
