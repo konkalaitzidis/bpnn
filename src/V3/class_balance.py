@@ -42,10 +42,10 @@ def check_class_imbalance_old_merged(df_new_annotations, experiment_ID, save_dir
     
      # create a bar chart of class percentages using Seaborn
     sns.set_style("whitegrid")
-    plt.figure(figsize=(8, 6))
-    f = sns.barplot(x=class_percents.index, y=class_percents.values, palette='pastel')
-    plt.xlabel('Behaviour Labels')
-    plt.ylabel('Percentage of Instances')
+    plt.figure(figsize=(4, 5))
+    f = sns.barplot(x=class_percents.index, y=class_percents.values, palette='Paired')
+    plt.xlabel('Behaviour Labels', fontsize = 12)
+    plt.ylabel('Percentage of Instances', fontsize = 12)
     plt.title('Distribution of Class Labels (n='+str(no_of_labels)+'), '+str(data_file))
     # rename the x-axis labels
     # for i in range(len(df_new_annotations_unique)):
@@ -62,7 +62,7 @@ def check_class_imbalance_old_merged(df_new_annotations, experiment_ID, save_dir
     timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 
     # Save the plot with the timestamp appended to the file name
-    plt.savefig(f"{save_dir}/{experiment_ID}_class_distribution_{timestamp}.png", dpi=100, bbox_inches='tight')
+    plt.savefig(f"{save_dir}/{experiment_ID}_class_distribution_{timestamp}.png", dpi=600, bbox_inches='tight')
     
     # plt.savefig(f"{save_dir}/{experiment_ID}_class_distribution.png", dpi=100, bbox_inches='tight')
     plt.show()
@@ -86,9 +86,9 @@ def check_class_imbalance_old(df_new_annotations, experiment_ID, save_dir, df_ne
      # create a bar chart of class percentages using Seaborn
     sns.set_style("whitegrid")
     plt.figure(figsize=(8, 6))
-    f = sns.barplot(x=class_percents.index, y=class_percents.values, palette='pastel')
-    plt.xlabel('Behaviour Labels')
-    plt.ylabel('Percentage of Instances')
+    f = sns.barplot(x=class_percents.index, y=class_percents.values, color="#6495ED")
+    plt.xlabel('Behaviour Labels', fontsize = 12)
+    plt.ylabel('Percentage of Instances', fontsize = 12)
     plt.title('Distribution of Class Labels (n='+str(no_of_labels)+'), '+str(data_file))
     # rename the x-axis labels
     # for i in range(len(df_new_annotations_unique)):
@@ -106,7 +106,7 @@ def check_class_imbalance_old(df_new_annotations, experiment_ID, save_dir, df_ne
     timestamp = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 
     # Save the plot with the timestamp appended to the file name
-    plt.savefig(f"{save_dir}/{experiment_ID}_class_distribution_{timestamp}.png", dpi=100, bbox_inches='tight')
+    plt.savefig(f"{save_dir}/{experiment_ID}_class_distribution_{timestamp}.svg", dpi=600, bbox_inches='tight')
     
     # plt.savefig(f"{save_dir}/{experiment_ID}_class_distribution.png", dpi=100, bbox_inches='tight')
     plt.show()
@@ -130,9 +130,9 @@ def check_class_imbalance_new(df_new_annotations, experiment_ID, save_dir, df_ne
      # create a bar chart of class percentages using Seaborn
     sns.set_style("whitegrid")
     plt.figure(figsize=(8, 6))
-    f = sns.barplot(x=class_percents.index, y=class_percents.values, palette='pastel')
-    plt.xlabel('Class Labels')
-    plt.ylabel('Percentage of Instances')
+    f = sns.barplot(x=class_percents.index, y=class_percents.values, palette='Paired')
+    plt.xlabel('Class Labels', fontsize=12)
+    plt.ylabel('Percentage of Instances', fontsize=12)
     plt.title('Distribution of Class Labels (n='+str(no_of_labels)+'), '+str(data_file))
     # rename the x-axis labels
     # for i in range(len(df_new_annotations_unique)):
