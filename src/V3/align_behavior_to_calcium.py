@@ -210,49 +210,61 @@ def align_files_new_labels(bonsai_paths, num_of_videos, h5_path):
     with (h5py.File(h5_path, 'r')) as f:
     # print(f['animal3learnday8'].keys())
     
-#         behavior_data_8 = pd.read_hdf(h5_path, 'animal3learnday8')
-#         behavior_data_8 = behavior_data_8.rename(columns={'state_id': 'state_name'})
-#         behavior_data_8['state_id'] = None
-#         behavior_data_8.loc[behavior_data_8['state_name'] == 'grooming', 'state_id'] = 0
-#         behavior_data_8.loc[behavior_data_8['state_name'] == 'immobile', 'state_id'] = 1
-#         behavior_data_8.loc[behavior_data_8['state_name'] == 'still', 'state_id'] = 2
-#         behavior_data_8.loc[behavior_data_8['state_name'] == 'moving', 'state_id'] = 3
-#         behavior_data_8.loc[behavior_data_8['state_name'] == 'rightTurn', 'state_id'] = 4
-#         behavior_data_8.loc[behavior_data_8['state_name'] == 'leftTurn', 'state_id'] = 5
-#         behavior_data_8 = behavior_data_8[['state_id', 'state_name']]
-#         behavior_data_list.append(behavior_data_8)
-#         # set the value of state_id to 0 when state_name is 'rightTurn'
+        behavior_data_8 = pd.read_hdf(h5_path, 'animal3learnday8')
+        behavior_data_8 = behavior_data_8.rename(columns={'state_id': 'state_name'})
+        behavior_data_8['state_id'] = None
+        behavior_data_8.loc[behavior_data_8['state_name'] == 'grooming', 'state_id'] = 0
+        behavior_data_8.loc[behavior_data_8['state_name'] == 'immobile', 'state_id'] = 1
+        behavior_data_8.loc[behavior_data_8['state_name'] == 'still', 'state_id'] = 2
+        behavior_data_8.loc[behavior_data_8['state_name'] == 'moving', 'state_id'] = 3
+        behavior_data_8.loc[behavior_data_8['state_name'] == 'rightTurn', 'state_id'] = 4
+        behavior_data_8.loc[behavior_data_8['state_name'] == 'leftTurn', 'state_id'] = 5
+        behavior_data_8 = behavior_data_8[['state_id', 'state_name']]
+        behavior_data_list.append(behavior_data_8)
+        # set the value of state_id to 0 when state_name is 'rightTurn'
 
 
 
-#         behavior_data_9 = pd.read_hdf(h5_path, 'animal3learnday9')
-#         behavior_data_9 = behavior_data_9.rename(columns={'state_id': 'state_name'})
-#         behavior_data_9['state_id'] = None
-#         behavior_data_9.loc[behavior_data_9['state_name'] == 'grooming', 'state_id'] = 0
-#         behavior_data_9.loc[behavior_data_9['state_name'] == 'immobile', 'state_id'] = 1
-#         behavior_data_9.loc[behavior_data_9['state_name'] == 'still', 'state_id'] = 2
-#         behavior_data_9.loc[behavior_data_9['state_name'] == 'moving', 'state_id'] = 3
-#         behavior_data_9.loc[behavior_data_9['state_name'] == 'rightTurn', 'state_id'] = 4
-#         behavior_data_9.loc[behavior_data_9['state_name'] == 'leftTurn', 'state_id'] = 5
-#         behavior_data_9 = behavior_data_9[['state_id', 'state_name']]
-#         behavior_data_list.append(behavior_data_9)
+        behavior_data_9 = pd.read_hdf(h5_path, 'animal3learnday9')
+        behavior_data_9 = behavior_data_9.rename(columns={'state_id': 'state_name'})
+        behavior_data_9['state_id'] = None
+        behavior_data_9.loc[behavior_data_9['state_name'] == 'grooming', 'state_id'] = 0
+        behavior_data_9.loc[behavior_data_9['state_name'] == 'immobile', 'state_id'] = 1
+        behavior_data_9.loc[behavior_data_9['state_name'] == 'still', 'state_id'] = 2
+        behavior_data_9.loc[behavior_data_9['state_name'] == 'moving', 'state_id'] = 3
+        behavior_data_9.loc[behavior_data_9['state_name'] == 'rightTurn', 'state_id'] = 4
+        behavior_data_9.loc[behavior_data_9['state_name'] == 'leftTurn', 'state_id'] = 5
+        behavior_data_9 = behavior_data_9[['state_id', 'state_name']]
+        behavior_data_list.append(behavior_data_9)
 
 
 
 
-#         behavior_data_10 = pd.read_hdf(h5_path, 'animal3learnday10')
-#         behavior_data_10 = behavior_data_10.rename(columns={'state_id': 'state_name'})
-#         behavior_data_10['state_id'] = None
-#         behavior_data_10.loc[behavior_data_10['state_name'] == 'grooming', 'state_id'] = 0
-#         behavior_data_10.loc[behavior_data_10['state_name'] == 'immobile', 'state_id'] = 1
-#         behavior_data_10.loc[behavior_data_10['state_name'] == 'still', 'state_id'] = 2
-#         behavior_data_10.loc[behavior_data_10['state_name'] == 'moving', 'state_id'] = 3
-#         behavior_data_10.loc[behavior_data_10['state_name'] == 'rightTurn', 'state_id'] = 4
-#         behavior_data_10.loc[behavior_data_10['state_name'] == 'leftTurn', 'state_id'] = 5
-#         behavior_data_10 = behavior_data_10[['state_id', 'state_name']]
-#         behavior_data_list.append(behavior_data_10)
+        behavior_data_10 = pd.read_hdf(h5_path, 'animal3learnday10')
+        behavior_data_10 = behavior_data_10.rename(columns={'state_id': 'state_name'})
+        behavior_data_10['state_id'] = None
+        behavior_data_10.loc[behavior_data_10['state_name'] == 'grooming', 'state_id'] = 0
+        behavior_data_10.loc[behavior_data_10['state_name'] == 'immobile', 'state_id'] = 1
+        behavior_data_10.loc[behavior_data_10['state_name'] == 'still', 'state_id'] = 2
+        behavior_data_10.loc[behavior_data_10['state_name'] == 'moving', 'state_id'] = 3
+        behavior_data_10.loc[behavior_data_10['state_name'] == 'rightTurn', 'state_id'] = 4
+        behavior_data_10.loc[behavior_data_10['state_name'] == 'leftTurn', 'state_id'] = 5
+        behavior_data_10 = behavior_data_10[['state_id', 'state_name']]
+        behavior_data_list.append(behavior_data_10)
         
-#         behavior_data_11 = pd.read_hdf(h5_path, 'animal2learnday11')
+        # behavior_data_11 = pd.read_hdf(h5_path, 'animal2learnday11')
+        # behavior_data_11 = behavior_data_11.rename(columns={'state_id': 'state_name'})
+        # behavior_data_11['state_id'] = None
+        # behavior_data_11.loc[behavior_data_11['state_name'] == 'grooming', 'state_id'] = 0
+        # behavior_data_11.loc[behavior_data_11['state_name'] == 'immobile', 'state_id'] = 1
+        # behavior_data_11.loc[behavior_data_11['state_name'] == 'still', 'state_id'] = 2
+        # behavior_data_11.loc[behavior_data_11['state_name'] == 'moving', 'state_id'] = 3
+        # behavior_data_11.loc[behavior_data_11['state_name'] == 'rightTurn', 'state_id'] = 4
+        # behavior_data_11.loc[behavior_data_11['state_name'] == 'leftTurn', 'state_id'] = 5
+        # behavior_data_11 = behavior_data_11[['state_id', 'state_name']]
+        # behavior_data_list.append(behavior_data_11)
+        
+#         behavior_data_11 = pd.read_hdf(h5_path, 'animal3learnday11')
 #         behavior_data_11 = behavior_data_11.rename(columns={'state_id': 'state_name'})
 #         behavior_data_11['state_id'] = None
 #         behavior_data_11.loc[behavior_data_11['state_name'] == 'grooming', 'state_id'] = 0
@@ -263,18 +275,6 @@ def align_files_new_labels(bonsai_paths, num_of_videos, h5_path):
 #         behavior_data_11.loc[behavior_data_11['state_name'] == 'leftTurn', 'state_id'] = 5
 #         behavior_data_11 = behavior_data_11[['state_id', 'state_name']]
 #         behavior_data_list.append(behavior_data_11)
-        
-        behavior_data_11 = pd.read_hdf(h5_path, 'animal3learnday11')
-        behavior_data_11 = behavior_data_11.rename(columns={'state_id': 'state_name'})
-        behavior_data_11['state_id'] = None
-        behavior_data_11.loc[behavior_data_11['state_name'] == 'grooming', 'state_id'] = 0
-        behavior_data_11.loc[behavior_data_11['state_name'] == 'immobile', 'state_id'] = 1
-        behavior_data_11.loc[behavior_data_11['state_name'] == 'still', 'state_id'] = 2
-        behavior_data_11.loc[behavior_data_11['state_name'] == 'moving', 'state_id'] = 3
-        behavior_data_11.loc[behavior_data_11['state_name'] == 'rightTurn', 'state_id'] = 4
-        behavior_data_11.loc[behavior_data_11['state_name'] == 'leftTurn', 'state_id'] = 5
-        behavior_data_11 = behavior_data_11[['state_id', 'state_name']]
-        behavior_data_list.append(behavior_data_11)
     
 
     for i, (path1, path2) in enumerate(zip(bonsai_data_list, behavior_data_list)):
