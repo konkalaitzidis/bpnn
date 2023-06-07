@@ -264,17 +264,17 @@ def align_files_new_labels(bonsai_paths, num_of_videos, h5_path):
         # behavior_data_11 = behavior_data_11[['state_id', 'state_name']]
         # behavior_data_list.append(behavior_data_11)
         
-#         behavior_data_11 = pd.read_hdf(h5_path, 'animal3learnday11')
-#         behavior_data_11 = behavior_data_11.rename(columns={'state_id': 'state_name'})
-#         behavior_data_11['state_id'] = None
-#         behavior_data_11.loc[behavior_data_11['state_name'] == 'grooming', 'state_id'] = 0
-#         behavior_data_11.loc[behavior_data_11['state_name'] == 'immobile', 'state_id'] = 1
-#         behavior_data_11.loc[behavior_data_11['state_name'] == 'still', 'state_id'] = 2
-#         behavior_data_11.loc[behavior_data_11['state_name'] == 'moving', 'state_id'] = 3
-#         behavior_data_11.loc[behavior_data_11['state_name'] == 'rightTurn', 'state_id'] = 4
-#         behavior_data_11.loc[behavior_data_11['state_name'] == 'leftTurn', 'state_id'] = 5
-#         behavior_data_11 = behavior_data_11[['state_id', 'state_name']]
-#         behavior_data_list.append(behavior_data_11)
+        # behavior_data_11 = pd.read_hdf(h5_path, 'animal3learnday11')
+        # behavior_data_11 = behavior_data_11.rename(columns={'state_id': 'state_name'})
+        # behavior_data_11['state_id'] = None
+        # behavior_data_11.loc[behavior_data_11['state_name'] == 'grooming', 'state_id'] = 0
+        # behavior_data_11.loc[behavior_data_11['state_name'] == 'immobile', 'state_id'] = 1
+        # behavior_data_11.loc[behavior_data_11['state_name'] == 'still', 'state_id'] = 2
+        # behavior_data_11.loc[behavior_data_11['state_name'] == 'moving', 'state_id'] = 3
+        # behavior_data_11.loc[behavior_data_11['state_name'] == 'rightTurn', 'state_id'] = 4
+        # behavior_data_11.loc[behavior_data_11['state_name'] == 'leftTurn', 'state_id'] = 5
+        # behavior_data_11 = behavior_data_11[['state_id', 'state_name']]
+        # behavior_data_list.append(behavior_data_11)
     
 
     for i, (path1, path2) in enumerate(zip(bonsai_data_list, behavior_data_list)):
