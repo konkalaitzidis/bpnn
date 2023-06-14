@@ -54,7 +54,7 @@ class NWBDataGeneratorTime(Sequence):
         self.labels = labels
         self.batch_size = batch_size
         self.frame_order = np.random.permutation(idx)
-        self.frame_order[self.frame_order >= self.images.shape[0]-5//2] -= 5//2
+        self.frame_order[self.frame_order >= self.images.shape[0]-7//2] -= 7//2
         self.min_frame = np.min(self.images, axis = 0)
         #self.images = self.images - self.min_frame
         
@@ -77,10 +77,10 @@ class NWBDataGeneratorTime(Sequence):
     
         # find min frame from the batch
         # remove the background
-        batch_images = np.empty((N, self.images.shape[1], self.images.shape[2], 5), dtype=self.images.dtype)
+        batch_images = np.empty((N, self.images.shape[1], self.images.shape[2], 7), dtype=self.images.dtype)
         for i, ind in enumerate(indices):
-            for t in range(5):
-                batch_images[i, :, :, t] = self.images[ind+t-5//2, :, :] - self.min_frame
+            for t in range(7):
+                batch_images[i, :, :, t] = self.images[ind+t-7//2, :, :] - self.min_frame
         
             
             

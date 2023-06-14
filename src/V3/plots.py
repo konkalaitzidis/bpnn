@@ -350,27 +350,28 @@ def plot_loss(experiment_ID, history, base_model_loss_dir, i):
 
 
 
-def plot_first_frames(images, labels, vmin, vmax, data_file):
+def plot_first_frames(images, labels, data_file):
 
     fig, axes = plt.subplots(nrows=1, ncols=5, figsize=(15, 5))
     axes = axes.flatten()
-    fig.suptitle("The First 5 Images from "+str(data_file), fontsize=16)
+    fig.suptitle("The First 5 Images from " + str(data_file), fontsize=16)
 
     # Generate a list of 5 random integers between 0 and the length of the images variable
-    indices = [0, 1, 2, 3, 4] #np.random.randint(0, len(images), 5) 5
+    indices = [0, 1, 2, 3, 4]
+
+    # Use a colormap for labels
+    cmap = plt.cm.get_cmap('tab10')
 
     # Loop over the indices and plot each frame with its corresponding label
     for i, index in enumerate(indices):
+        axes[i].imshow(images[index], cmap='gray')
+        label_name = labels[i]
 
-        axes[i].imshow(images[index], vmin = vmin, vmax = vmax) #,  interpolation = 'none'
-        label_name = labels[indices[i]]
 
-        # if label_name == 0:
-        #     label_name = "Main Corr"
-        # elif label_name == 1:
-        #     label_name = "Left Corr"
-        # else:
-        #     label_name = "Right Corr"
+        if isinstance(label_name, np.ndarray):
+            label_name = np.argmax(label_name)
+
+        label_color = cmap(label_name)
 
         if label_name == 0:
             label_name = "Grooming"
@@ -384,23 +385,18 @@ def plot_first_frames(images, labels, vmin, vmax, data_file):
             label_name = "Right Turn"            
         else:
             label_name = "Left Turn"
-            
-        # Convert binary labels to the desired format
-        if isinstance(labels[indices[i]], np.ndarray):
-            label_name = np.argmax(labels[indices[i]])
-        axes[i].set_title("Label: " + str(label_name), fontsize=12)
-        # axes[i].tick_params(axis='both', which='both', length=0)
-        # axes[i].set_xticklabels([])
-        # axes[i].set_yticklabels([])
-        # plt.subplots_adjust(wspace=0.05, hspace=0)
+
+        axes[i].set_title("Label: " + str(label_name), fontsize=14, color="black")
+        axes[i].axis('off')
+
+    plt.subplots_adjust(wspace=0.1)
     plt.tight_layout()
     plt.show()
 
 
-
     
     
-def plot_random_frames(images, labels, vmin, vmax, data_file):
+def plot_random_frames(images, labels, data_file):
 
     fig, axes = plt.subplots(nrows=1, ncols=5, figsize=(15, 5))
     axes = axes.flatten()
@@ -409,18 +405,20 @@ def plot_random_frames(images, labels, vmin, vmax, data_file):
     # Generate a list of 5 random integers between 0 and the length of the images variable
     indices = np.random.randint(0, len(images), 5)
 
+    # Use a colormap for labels
+    cmap = plt.cm.get_cmap('tab10')
+
     # Loop over the indices and plot each frame with its corresponding label
     for i, index in enumerate(indices):
-        axes[i].imshow(images[index], vmin = vmin, vmax = vmax)
+        axes[i].imshow(images[index], cmap='gray')
         label_name = labels[indices[i]]
-        
-        # if label_name == 0:
-        #     label_name = "Main Corr"
-        # elif label_name == 1:
-        #     label_name = "Left Corr"
-        # else:
-        #     label_name = "Right Corr"
-        
+
+        # Convert binary labels to the desired format
+        if isinstance(labels[indices[i]], np.ndarray):
+            label_name = np.argmax(labels[indices[i]])
+
+        label_color = cmap(label_name)
+
         if label_name == 0:
             label_name = "Grooming"
         elif label_name == 1:
@@ -434,18 +432,22 @@ def plot_random_frames(images, labels, vmin, vmax, data_file):
         else:
             label_name = "Left Turn"
 
-        # Convert binary labels to the desired format
-        if isinstance(labels[indices[i]], np.ndarray):
-            label_name = np.argmax(labels[indices[i]])
-        axes[i].set_title("Label: " + str(label_name), fontsize=12)
-        axes[i].tick_params(axis='both', which='both', length=0)
-        axes[i].set_xticklabels([])
-        axes[i].set_yticklabels([])
+        # if label_name == 0:
+        #     label_name = "Main Corr"
+        # elif label_name == 1:
+        #     label_name = "Left Corr"
+        # else:
+        #     label_name = "Right Corr"
 
-    # plt.subplots_adjust(wspace=0.05, hspace=0)
+        axes[i].set_title("Label: " + str(label_name), fontsize=14, color="black")
+        axes[i].axis('off')
+
+    plt.subplots_adjust(wspace=0.1)
+    plt.tight_layout()
     plt.show()
-    # plt.savefig('five_random_frames.png')
-
+    
+    
+    
     
 def plot_image_pixel_values(img):
     downsampled_img = resize(img, (int(img.shape[0]/16), int(img.shape[1]/16)), anti_aliasing=True)

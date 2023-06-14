@@ -1,37 +1,26 @@
-import csv  # CSV module is used for working with CSV (Comma Separated Values) files in Python.
-# from f1_score import f1_score
+import csv 
 import os
 import pickle
-import time  # for time-related functions
+import time  
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
-
-
 import tensorflow.compat.v1 as tf
+import gc
+
 from tensorflow.keras import datasets, layers, models
 from tensorflow.keras.optimizers.legacy import Adam
 from tensorflow.keras.utils import plot_model
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
-
 from sklearn.model_selection import KFold
-# Train and evaluate the model for each fold
 from keras.models import load_model
-
-# import NWBDataGenerator and use it in your code
 from nwb_data_generator import NWBDataGeneratorTime, NWBDataGenerator
 from model_architecture import construct_model
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import confusion_matrix, f1_score
-
-
-
 from plots import plot_cm_k_fold
 from class_balance import check_class_imbalance_k_fold
-
-import gc
-
 from matplotlib.backends.backend_pdf import PdfPages
 
 
@@ -392,39 +381,3 @@ def run_k_fold_basic(params,
   
     return train_loss_all, val_loss_all, train_acc_all, val_acc_all, average_score_list, conf_matrices, f1_score_val_list, train_labels_names
 
-
-
-    # plot_confusion_matrix(experiment_ID, no_of_behaviors, train_generator, val_generator, train_labels, val_labels, train_images, val_images, model_cm_dir, model_path, model_version)
-
-    
-    
-    
-    
-    
-    
-#     dir_name = "/home/dmc/Desktop/kostas/direct-Behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks/src/V2/output/pickles"
-#     model_save_name = str(model_version)+'.h5'
-#     print("Now saving model data to pickles. Please wait...")
-#     model.save(f"{save_dir}/{model_save_name}")
-    
-#     dir_name_pickles = "src/V2/output/pickels"
-#     # Save the history object to a pickle file
-#     with open(os.path.join(save_dir, 'history.pkl'), 'wb') as f:
-#         pickle.dump(history.history, f)
-    
-#     with open(os.path.join(save_dir, 'train_images.pkl'), 'wb') as f:
-#         pickle.dump(train_images, f)
-
-#     with open(os.path.join(save_dir, 'val_images.pkl'), 'wb') as f:
-#         pickle.dump(val_images, f)
-
-#     with open(os.path.join(save_dir, 'train_labels.pkl'), 'wb') as f:
-#         pickle.dump(train_labels, f)
-        
-#     with open(os.path.join(save_dir, 'val_labels.pkl'), 'wb') as f:
-#         pickle.dump(val_labels, f)
-        
-#     print("Done!")
-
-    
-#     return history
