@@ -181,7 +181,7 @@ def run_k_fold(params,
     
     #plot the mean confusion matrix
     mean_cm = np.mean(conf_matrices, axis=0)
-    train_labels_names = ['moving', 'rightTurn', 'immobile', 'grooming', 'still', 'leftTurn']
+    # train_labels_names = ['moving', 'rightTurn', 'immobile', 'grooming', 'still', 'leftTurn']
     plt.figure(figsize=(8, 6))
     sns.heatmap(mean_cm, annot=True, cmap='Blues', fmt='g')
     plt.title('BPNNt - Mean Confusion Matrix - K-Fold Cross Validation')

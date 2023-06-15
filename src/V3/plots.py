@@ -37,17 +37,6 @@ def plot_cm_k_fold(model_cm_dir, fold, cm, conf_matrices, train_labels_names):
             plt.show()
     
 
-    # no_of_behaviors = no_of_behaviors
-    # n_classes = num_classes   
-    # mean_conf_matrix = np.mean(conf_matrices, axis=0)
-    # plt.figure(figsize=(8, 6))
-    # sns.heatmap(mean_conf_matrix, annot=True, cmap='Blues', fmt='g', xticklabels=no_of_behaviors, yticklabels=no_of_behaviors)
-    # plt.title('Confusion Matrix - K-fold, Location Labels')
-    # plt.xlabel('Predicted Labels')
-    # plt.ylabel('True Labels')
-    # plt.savefig(model_cm_dir+"/"+'cm_val_'+str(experiment_ID)+'.svg', bbox_inches='tight', dpi=300)
-    # plt.show()
-
 #=============================================#
 
 def plot_confusion_matrix(experiment_ID, no_of_behaviors, train_labels, val_labels, train_images, val_images, base_model_cm_dir, model_path, model_version):
