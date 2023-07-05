@@ -1,0 +1,25 @@
+Experiment ID,Model,Epoch,Train Loss,Train Acc,Val Loss,Val Acc,Date/Time,Video Name,Comment
+2.5,BPNN_base_v2,1,0.7869830131530762,0.7993595004081726,0.6335427761077881,0.7994711995124817,2023-04-13 14:23:35,animal3learnday11,"Building base model... Building base model, turning-type labels, 20% val - 80% train"
+2.5,BPNN_base_v2,2,0.6152601838111877,0.8108987212181091,0.6978507041931152,0.7994711995124817,2023-04-13 14:23:35,animal3learnday11,"Building base model... Building base model, turning-type labels, 20% val - 80% train"
+2.5,BPNN_base_v2,3,0.6087350845336914,0.8108987212181091,0.6598717570304871,0.7994711995124817,2023-04-13 14:23:35,animal3learnday11,"Building base model... Building base model, turning-type labels, 20% val - 80% train"
+2.5,BPNN_base_v2,4,0.5962509512901306,0.8108478784561157,0.6493090987205505,0.7984543442726135,2023-04-13 14:23:35,animal3learnday11,"Building base model... Building base model, turning-type labels, 20% val - 80% train"
+,,,,,,,,,
+2.6,BPNN_base_v2,1,2.695528984069824,0.6968280076980591,0.7268002033233643,0.7970306873321533,2023-04-13 15:45:23,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,2,1.2611117362976074,0.732309877872467,0.7056316137313843,0.7659142017364502,2023-04-13 15:45:23,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,3,0.7673413753509521,0.7802460193634033,0.8571205139160156,0.7956070899963379,2023-04-13 15:45:23,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,4,0.6868248581886292,0.7979869842529297,0.7840989232063293,0.6949359178543091,2023-04-13 15:45:23,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,5,0.6485835909843445,0.8032228350639343,0.5531869530677795,0.8069961071014404,2023-04-13 15:45:23,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,6,0.5897502303123474,0.8129320740699768,0.6086288094520569,0.8035387396812439,2023-04-13 15:45:23,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,7,0.5354976058006287,0.8237596750259399,0.6321789622306824,0.8045555949211121,2023-04-13 15:45:23,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,8,0.5171562433242798,0.8288429975509644,0.5496687889099121,0.8067927360534668,2023-04-13 15:45:23,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,9,0.5018070936203003,0.8288938403129578,0.6903401613235474,0.7585926651954651,2023-04-13 15:45:23,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,10,0.49138468503952026,0.8322997093200684,0.6179962158203125,0.8008948564529419,2023-04-13 15:45:23,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,11,0.5130709409713745,0.8256404995918274,0.6575103402137756,0.7777099609375,2023-04-13 15:45:23,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+,,,,,,,,,
+2.6,BPNN_base_v2,1,0.9247393608093262,0.7974786758422852,0.6788068413734436,0.7994711995124817,2023-04-13 15:51:43,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,2,0.6260392665863037,0.8103395700454712,0.7408696413040161,0.7994711995124817,2023-04-13 15:51:43,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,3,0.6019313931465149,0.8108478784561157,0.628012478351593,0.7994711995124817,2023-04-13 15:51:43,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,4,0.5941577553749084,0.8108987212181091,0.6288180351257324,0.7994711995124817,2023-04-13 15:51:43,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,5,0.5867397785186768,0.8108987212181091,0.6532225608825684,0.7994711995124817,2023-04-13 15:51:43,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,6,0.5902003049850464,0.8108987212181091,0.6307024955749512,0.7994711995124817,2023-04-13 15:51:43,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+,,,,,,,,,

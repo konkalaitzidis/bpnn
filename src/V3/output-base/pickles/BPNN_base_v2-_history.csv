@@ -1,0 +1,16 @@
+Experiment ID,Model,Epoch,Train Loss,Train Acc,Val Loss,Val Acc,F1-Score,Date/Time,Video Name,Comment
+2.6,BPNN_base_v2,1,0.7674674391746521,0.8025619983673096,0.6380606293678284,0.7994711995124817,0.7994712222900142,2023-04-13 17:22:59,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,2,0.6126883625984192,0.8108987212181091,0.6308881044387817,0.7994711995124817,0.7994712222900142,2023-04-13 17:22:59,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,3,0.6018198728561401,0.8108987212181091,0.6449894309043884,0.7994711995124817,0.7994712222900142,2023-04-13 17:22:59,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,4,0.5983541011810303,0.8108987212181091,0.6391394734382629,0.7994711995124817,0.7994712222900142,2023-04-13 17:22:59,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+2.6,BPNN_base_v2,5,0.5929680466651917,0.8108478784561157,0.6684891581535339,0.7994711995124817,0.7994712222900142,2023-04-13 17:22:59,animal3learnday11,"To compare with BPNN_V2... Building base model, turning-type labels, 20% val - 80% train"
+,,,,,,,,,,
+2.7,BPNN_base_v2,1,1.426695704460144,0.4502338469028473,1.2213433980941772,0.41448038816452026,0.5623347569656294,2023-04-13 17:53:59,animal3learnday11,"To compare with BPNN_V2... Corridor location labels, turning-type labels, 20% val - 80% train"
+2.7,BPNN_base_v2,2,1.0397582054138184,0.5129625797271729,0.8117796778678894,0.46003660559654236,0.5623347569656294,2023-04-13 17:53:59,animal3learnday11,"To compare with BPNN_V2... Corridor location labels, turning-type labels, 20% val - 80% train"
+2.7,BPNN_base_v2,3,0.9560763239860535,0.539294421672821,0.7678877711296082,0.6447020769119263,0.5623347569656294,2023-04-13 17:53:59,animal3learnday11,"To compare with BPNN_V2... Corridor location labels, turning-type labels, 20% val - 80% train"
+2.7,BPNN_base_v2,4,0.9314570426940918,0.5549511909484863,0.9236013889312744,0.5666056275367737,0.5623347569656294,2023-04-13 17:53:59,animal3learnday11,"To compare with BPNN_V2... Corridor location labels, turning-type labels, 20% val - 80% train"
+2.7,BPNN_base_v2,5,0.9267701506614685,0.5629829168319702,0.7520116567611694,0.6105349063873291,0.5623347569656294,2023-04-13 17:53:59,animal3learnday11,"To compare with BPNN_V2... Corridor location labels, turning-type labels, 20% val - 80% train"
+2.7,BPNN_base_v2,6,1.0459680557250977,0.45394468307495117,0.9483540058135986,0.5623347759246826,0.5623347569656294,2023-04-13 17:53:59,animal3learnday11,"To compare with BPNN_V2... Corridor location labels, turning-type labels, 20% val - 80% train"
+2.7,BPNN_base_v2,7,1.0383552312850952,0.4356954097747803,0.9115784764289856,0.5623347759246826,0.5623347569656294,2023-04-13 17:53:59,animal3learnday11,"To compare with BPNN_V2... Corridor location labels, turning-type labels, 20% val - 80% train"
+2.7,BPNN_base_v2,8,1.03661048412323,0.4356954097747803,0.9045923352241516,0.5623347759246826,0.5623347569656294,2023-04-13 17:53:59,animal3learnday11,"To compare with BPNN_V2... Corridor location labels, turning-type labels, 20% val - 80% train"
+,,,,,,,,,,

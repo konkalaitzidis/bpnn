@@ -1,0 +1,6 @@
+Experiment ID,Model,Epoch,Train Loss,Train Acc,Val Loss,Val Acc,Date/Time,Video Name,Comment
+2.5,BPNN_base_v2,1,0.7869830131530762,0.7993595004081726,0.6335427761077881,0.7994711995124817,2023-04-13 14:23:35,animal3learnday11,"Building base model... Building base model, turning-type labels, 20% val - 80% train"
+2.5,BPNN_base_v2,2,0.6152601838111877,0.8108987212181091,0.6978507041931152,0.7994711995124817,2023-04-13 14:23:35,animal3learnday11,"Building base model... Building base model, turning-type labels, 20% val - 80% train"
+2.5,BPNN_base_v2,3,0.6087350845336914,0.8108987212181091,0.6598717570304871,0.7994711995124817,2023-04-13 14:23:35,animal3learnday11,"Building base model... Building base model, turning-type labels, 20% val - 80% train"
+2.5,BPNN_base_v2,4,0.5962509512901306,0.8108478784561157,0.6493090987205505,0.7984543442726135,2023-04-13 14:23:35,animal3learnday11,"Building base model... Building base model, turning-type labels, 20% val - 80% train"
+,,,,,,,,,
