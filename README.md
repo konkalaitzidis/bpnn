@@ -1,6 +1,6 @@
-# Behaviour Prediction Neural Network (BPNN)
+# Behaviour Prediction Neural Network (BPNN) toolkit
 
-This repository contains the code for the experimental part of my MSc Thesis at Karolinska Institutet and Stockholm Universitet titled "Direct Behaviour Prediction from Miniscope Calcium Imaging Using Convolutional Neural Networks". The interested reader can access the Thesis print via this link: https://drive.google.com/file/d/1avRTjyJE3bpw_BOo2nvuhFnxl442z4bC/view?usp=sharing 
+This repository contains the code for the BPNN toolkit developed for the MSc Thesis work at Karolinska Institutet and Stockholm Universitet titled "Direct Behaviour Prediction from Miniscope Calcium Imaging Using Convolutional Neural Networks". The interested reader can access the Thesis print via this link: https://drive.google.com/file/d/1avRTjyJE3bpw_BOo2nvuhFnxl442z4bC/view?usp=sharing 
 
 ## Abstract
 ### Background: 
@@ -19,10 +19,10 @@ To get started, follow these steps:
 
 1. Clone the Repository. Open your terminal and navigate to a directory of your choice. Then clone the repository with:
     ```sh
-    git clone https://github.com/konkalaitzidis/behaviour-prediction-neural-network.git
+    git clone https://github.com/konkalaitzidis/bpnn.git
     ```
     ```sh
-    cd direct-behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks.git
+    cd bpnn.git
     ```
 
 2. Set up a Virtual Environment. Create and activate a Virtual Environment for managing dependencies (recommended). Replace `name_of_venv` with your desired environment name.
@@ -47,6 +47,7 @@ To get started, follow these steps:
     pip install -r requirements.txt
     ```
 
+# continue updating the readme
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
