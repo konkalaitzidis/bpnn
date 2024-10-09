@@ -1,6 +1,6 @@
-# Direct Behavior Prediction from Miniscope Calcium Imaging Using Convolutional Neural Networks
+# Behaviour Prediction Neural Network (BPNN)
 
-This repository contains the code for the experimental part of my Thesis work at Karolinska Institutet and Stockholm Universitet. The interested reader can access the Thesis via this link: https://drive.google.com/file/d/1avRTjyJE3bpw_BOo2nvuhFnxl442z4bC/view?usp=sharing 
+This repository contains the code for the experimental part of my MSc Thesis at Karolinska Institutet and Stockholm Universitet titled "Direct Behaviour Prediction from Miniscope Calcium Imaging Using Convolutional Neural Networks". The interested reader can access the Thesis print via this link: https://drive.google.com/file/d/1avRTjyJE3bpw_BOo2nvuhFnxl442z4bC/view?usp=sharing 
 
 ## Abstract
 ### Background: 
@@ -13,6 +13,40 @@ In this study, previously collected calcium imaging datasets from behavioural as
 Several experiments were performed to evaluate the BPNN's capacity to predict behaviour compared to current methods. However, issues related to overfitting arose, which may have been caused by technical discrepancies or other biological artefacts produced during the calcium imaging recording sessions. Despite this, the BPNN produced similar or better results in predicting animal behaviour, with an F1-score of 0.56 compared to the F1-score of 0.41 of an existing calcium imaging analysis tool concerning the same biological task.
 ### Conclusion: 
 The best-performing configuration of the BPNN model demonstrated a limited yet plausible ability to establish links between neural activity and specific animal behaviours, indicating the potential applicability of CNNs in behaviour prediction assignments. However, further research is required to address current technical and biological limitations to reaffirm the postulations of this study.
+
+## Installation
+To get started, follow these steps:
+
+1. Clone the Repository. Open your terminal and navigate to a directory of your choice. Then clone the repository with:
+    ```sh
+    git clone https://github.com/konkalaitzidis/behaviour-prediction-neural-network.git
+    ```
+    ```sh
+    cd direct-behavior-prediction-from-miniscope-calcium-imaging-using-convolutional-neural-networks.git
+    ```
+
+2. Set up a Virtual Environment. Create and activate a Virtual Environment for managing dependencies (recommended). Replace `name_of_venv` with your desired environment name.
+
+    Linux/macOS:
+    ```sh
+    python -m venv name_of_venv
+    ```
+    ```sh
+    source name_of_venv/bin/activate 
+    ```
+    Windows: 
+    ```sh
+    python -m venv name_of_venv
+    ```
+    ```sh
+    name_of_venv\Scripts\activate
+    ```
+
+3. Install Dependencies. Install the required packages by running the following command:
+    ```sh
+    pip install -r requirements.txt
+    ```
+
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
