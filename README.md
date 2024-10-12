@@ -47,8 +47,6 @@ To get started, follow these steps:
     pip install -r requirements.txt
     ```
 
-# continue updating the readme
-
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
