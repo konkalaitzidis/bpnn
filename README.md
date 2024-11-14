@@ -13,7 +13,7 @@ In this study, previously collected calcium imaging datasets from behavioural as
 Several experiments were performed to evaluate the BPNN's capacity to predict behaviour compared to current methods. However, issues related to overfitting arose, which may have been caused by technical discrepancies or other biological artefacts produced during the calcium imaging recording sessions. Despite this, the BPNN produced similar or better results in predicting animal behaviour, with an F1-score of 0.56 compared to the F1-score of 0.41 of an existing calcium imaging analysis tool concerning the same biological task.
 ### Conclusion: 
 The best-performing configuration of the BPNN model demonstrated a limited yet plausible ability to establish links between neural activity and specific animal behaviours, indicating the potential applicability of CNNs in behaviour prediction assignments. However, further research is required to address current technical and biological limitations to reaffirm the postulations of this study.
-<!-- 
+
 ## Installation
 To get started, follow these steps:
 
@@ -50,6 +50,6 @@ To get started, follow these steps:
 # continue updating the readme -->
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. -->
 
 
