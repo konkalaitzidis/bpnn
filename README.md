@@ -14,7 +14,7 @@ Several experiments were performed to evaluate the BPNN's capacity to predict be
 ### Conclusion: 
 The best-performing configuration of the BPNN model demonstrated a limited yet plausible ability to establish links between neural activity and specific animal behaviours, indicating the potential applicability of CNNs in behaviour prediction assignments. However, further research is required to address current technical and biological limitations to reaffirm the postulations of this study.
 
-## Installation
+<!-- ## Installation
 To get started, follow these steps:
 
 1. Clone the Repository. Open your terminal and navigate to a directory of your choice. Then clone the repository with:
@@ -50,6 +50,6 @@ To get started, follow these steps:
 # continue updating the readme
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. -->
 
 
