@@ -19,8 +19,8 @@ from nwb_data_generator import NWBDataGeneratorTime, NWBDataGenerator
 from model_architecture import construct_model
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import confusion_matrix, f1_score
-from plots import plot_cm_k_fold
-from class_balance import check_class_imbalance_k_fold
+from bpnn.src.plots import plot_cm_k_fold
+from bpnn.src.class_balance import check_class_imbalance_k_fold
 from matplotlib.backends.backend_pdf import PdfPages
 
 
