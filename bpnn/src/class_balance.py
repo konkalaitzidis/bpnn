@@ -6,9 +6,6 @@ import seaborn as sns
 import datetime
 
 
-
-
-
 def check_class_imbalance_k_fold(train_class_counts, 
                                  test_class_counts, 
                                  fold, 
@@ -34,8 +31,6 @@ def check_class_imbalance_k_fold(train_class_counts,
     return fig
     
 
-
-    
     
 def check_class_imbalance_old_merged(df_new_annotations, 
                                      experiment_ID, 
@@ -46,17 +41,34 @@ def check_class_imbalance_old_merged(df_new_annotations,
                                      names_of_labels, 
                                      data_file, 
                                      label_names):
+    """
+    Check class imbalance in the old merged dataset and plot the distribution.
+
+    Parameters:
+    df_new_annotations (pd.DataFrame): DataFrame containing new annotations.
+    experiment_ID (str): ID of the experiment.
+    save_dir (str): Directory to save the plots.
+    df_new_annotations_unique (pd.DataFrame): DataFrame containing unique new annotations.
+    df_new_annotations_check (pd.DataFrame): DataFrame to check new annotations.
+    no_of_labels (int): Number of labels.
+    names_of_labels (list): List of label names.
+    data_file (str): Name of the data file.
+    label_names (list): List of label names.
+
+    Returns:
+    tuple: class_counts (pd.Series), total_counts (int)
+    """
 
     total_counts = 0
+    class_counts = pd.value_counts(df_new_annotations_check['state_id'])
     for i in range(len(df_new_annotations_unique)):
-        class_counts = pd.value_counts(df_new_annotations_check['state_id'])
-        total_counts = total_counts + class_counts[i]
+        total_counts = total_counts + class_counts.get(i, 0)
+        total_counts = total_counts + class_counts.get(i, 0)
 
     # calculate the percentage of each class in the dataset
     class_percents = pd.value_counts(df_new_annotations, normalize=True) * 100
 
-    
-     # create a bar chart of class percentages using Seaborn
+    # create a bar chart of class percentages using Seaborn
     sns.set_style("whitegrid")
     plt.figure(figsize=(4, 5))
     f = sns.barplot(x=class_percents.index, y=class_percents.values, palette='Paired')
@@ -80,8 +92,8 @@ def check_class_imbalance_old_merged(df_new_annotations,
     
     # plt.savefig(f"{save_dir}/{experiment_ID}_class_distribution.png", dpi=100, bbox_inches='tight')
     plt.show()
-    
-    return class_counts, total_counts
+    class_counts = pd.value_counts(df_new_annotations_check['state_id'])
+    total_counts = total_counts + class_counts.get(i, 0)
     
     
     
@@ -94,6 +106,22 @@ def check_class_imbalance_old(df_new_annotations,
                               no_of_labels, 
                               data_file, 
                               label_names):
+    """
+    Check class imbalance in the old dataset and plot the distribution.
+
+    Parameters:
+    df_new_annotations (pd.DataFrame): DataFrame containing new annotations.
+    experiment_ID (str): ID of the experiment.
+    save_dir (str): Directory to save the plots.
+    df_new_annotations_unique (pd.DataFrame): DataFrame containing unique new annotations.
+    df_new_annotations_check (pd.DataFrame): DataFrame to check new annotations.
+    no_of_labels (int): Number of labels.
+    data_file (str): Name of the data file.
+    label_names (list): List of label names.
+
+    Returns:
+    tuple: class_counts (pd.Series), total_counts (int)
+    """
     
     total_counts = 0
     for i in range(len(df_new_annotations_unique)):
@@ -141,6 +169,22 @@ def check_class_imbalance_new(df_new_annotations,
                               no_of_labels, 
                               data_file, 
                               label_names):
+    """
+    Check class imbalance in the new dataset and plot the distribution.
+
+    Parameters:
+    df_new_annotations (pd.DataFrame): DataFrame containing new annotations.
+    experiment_ID (str): ID of the experiment.
+    save_dir (str): Directory to save the plots.
+    df_new_annotations_unique (pd.DataFrame): DataFrame containing unique new annotations.
+    df_new_annotations_check (pd.DataFrame): DataFrame to check new annotations.
+    no_of_labels (int): Number of labels.
+    data_file (str): Name of the data file.
+    label_names (list): List of label names.
+
+    Returns:
+    tuple: class_counts (pd.Series), total_counts (int)
+    """
     
     total_counts = 0
     for i in range(len(df_new_annotations_unique)):
