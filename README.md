@@ -11,7 +11,7 @@ Welcome to the repository for the BPNN toolkit, developed during my MSc Thesis w
   - Investigate the application of CNNs in linking neural activity with behaviour.
   - Reduce pre-processing requirements in calcium imaging analysis.
   - Compare the performance of BPNN with state-of-the-art calcium imaging analysis methods.
-- **Thesis Document**: Access the thesis [here](https://drive.google.com/file/d/1avRTjyJE3bpw_BOo2nvuhFnxl442z4bC/view?usp=sharing).
+- **Thesis Document**: Access the thesis [here](https://www.kostaskal.com/bpnn).
 
 ---
 
